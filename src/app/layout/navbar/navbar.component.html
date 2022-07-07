@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <span>Transenvios</span>
+  <span class="navbar-spacer"></span>
+  <button mat-button (click)="gotoRoute('/dashboard/shipment-orders')">Solicitudes</button>
+  <button mat-button (click)="gotoRoute('/admin/clients')">Clientes</button>
+  <button mat-button (click)="gotoRoute('/admin/users')">Administradores</button>
+  <button mat-button (click)="gotoRoute('/admin/transporters')">Transportadores</button>
+  <button mat-button (click)="gotoRoute('/admin/routes')">Rutas</button>
+  <span class="navbar-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+    (click)="gotoRoute('/logout')"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
