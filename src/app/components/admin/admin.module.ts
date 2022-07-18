@@ -9,6 +9,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { RoutesComponent } from './routes/routes.component';
 import { TransportersComponent } from './transporters/transporters.component';
 import { HomeComponent } from './home/home.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HomeComponent } from './home/home.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    LayoutModule
+    LayoutModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

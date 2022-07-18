@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   showError(
     message: string,
     title: string = '',
-    durationInSeconds: number = 5
+    durationInSeconds: number = 2
   ) {
     this._snackBar.open(message, title, {
       duration: durationInSeconds * 1000,

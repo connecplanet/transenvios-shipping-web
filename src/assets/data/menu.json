@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Solicitudes",
+        "redirect": "/dashboard/shipment-orders"
+    },
+    {
+        "name": "Clientes",
+        "redirect": "/admin/clients"
+    },
+    {
+        "name": "Administradores",
+        "redirect": "/admin/users"
+    },
+    {
+        "name": "Transportadores",
+        "redirect": "/admin/transporters"
+    },
+    {
+        "name": "Rutas",
+        "redirect": "/admin/routes"
+    }
+]
