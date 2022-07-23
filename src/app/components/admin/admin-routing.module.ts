@@ -5,6 +5,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { HomeComponent } from './home/home.component';
 import { RoutesComponent } from './routes/routes.component';
 import { TransportersComponent } from './transporters/transporters.component';
+import { CreateUserComponent } from './users/create-user/create-user.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'transporters', component: TransportersComponent },
       { path: 'routes', component: RoutesComponent },
+      { path: 'create-user', component: CreateUserComponent },
     ],
   },
 ];

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {
     this.form = this.fb.group({
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     title: string = '',
     durationInSeconds: number = 2
   ) {
-    this._snackBar.open(message, title, {
+    this.snackBar.open(message, title, {
       duration: durationInSeconds * 1000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',

@@ -20,3 +20,8 @@ th {
 .delete-color {
   color: #e15639;
 }
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatSliderModule } from '@angular/material/slider';
 import {
@@ -16,14 +17,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-import { HttpClientModule } from '@angular/common/http';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
@@ -32,9 +37,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    HttpClientModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule
   ],
   providers: [
     {
@@ -44,6 +53,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [
     ReactiveFormsModule,
+    HttpClientModule,
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
@@ -52,9 +62,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    HttpClientModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule
   ]
 })
 export class SharedModule {}
