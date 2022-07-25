@@ -8,33 +8,33 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css']
+  styleUrls: ['./create-user.component.css'],
 })
 export class CreateUserComponent implements OnInit {
   roles: any[] = [
-    {value: 'MGR', viewValue: 'Administrador'}, // MANAGER
-    {value: 'APL', viewValue: 'Solicitante'},   // APPLICANT
-    {value: 'SNR', viewValue: 'Remitente'},     // SENDER
-    {value: 'RCP', viewValue: 'Destinatario'},  // RECIPIENT
+    { value: 'MGR', viewValue: 'Administrador' }, // MANAGER
+    { value: 'APL', viewValue: 'Solicitante' }, // APPLICANT
+    { value: 'SNR', viewValue: 'Remitente' }, // SENDER
+    { value: 'RCP', viewValue: 'Destinatario' }, // RECIPIENT
   ];
-  form: FormGroup
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar
+  ) {
     this.form = this.fb.group({
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       phone: ['', Validators.required],
-      role: ['MGR', Validators.required]
+      role: ['MGR', Validators.required],
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   AddUser() {
     const user: User = {
@@ -47,7 +47,8 @@ export class CreateUserComponent implements OnInit {
     this.userService.addUser(user);
     this.router.navigate(['/admin/users']);
 
-    this.snackBar.open('El usuario fue adicionado con exito', '', {
+    this.snackBar.open(
+      'El usuario fue adicionado con exito', '', {
       duration: 1500,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
