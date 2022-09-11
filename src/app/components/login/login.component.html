@@ -8,7 +8,7 @@
       <div class="login">
         <mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
         <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()">
-          <h2 style="font-size: 35px;">Ingresar como administrador</h2>
+          <h2>Ingresar como administrador</h2>
           <mat-form-field class="item-width" appearance="outline">
             <mat-icon matPrefix>alternate_email</mat-icon>
             <mat-label>Correo electrónico</mat-label>
