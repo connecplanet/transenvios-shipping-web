@@ -29,6 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Angular material
 
 [Angular Material Tutorial](https://www.youtube.com/watch?v=rWOwTVSMfPw)
+[CRUD Angular - Firebase](https://www.youtube.com/watch?v=wrp47fBoWns)
 [Angular code style guide](https://angular.io/guide/styleguide)
 [Getting started](https://material.angular.io/guide/getting-started)
 
