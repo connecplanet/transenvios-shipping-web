@@ -25,24 +25,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-# Angular material
-
-[Angular Material Tutorial](https://www.youtube.com/watch?v=rWOwTVSMfPw)
-[Angular code style guide](https://angular.io/guide/styleguide)
-[Getting started](https://material.angular.io/guide/getting-started)
-
-# Icons
-
-[Flaticon](https://flaticon.es)
-[Google](https://fonts.google.com/icons)
-
-# Create the appp with routing
-
-Set up an app `ng new customer-app --routing`
-
-# Add routing
-
-Create module with routing `ng g m components/dashboard --routing`
-Create a component `ng g c components/dashboard`
-
