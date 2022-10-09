@@ -44,10 +44,6 @@ const routes: Routes = [
     ],
     exports: [
         RouterModule
-    ],
-    entryComponents: [
-        DialogResultExampleDialog,
-        PizzaPartyComponent
     ]
 })
 export class MaterialModule { }
