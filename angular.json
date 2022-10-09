@@ -3,11 +3,14 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "transenvios-shipping-web": {
+    "ng2angle": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "",
@@ -17,34 +20,41 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/transenvios-shipping-web",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "chart.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/app/core/preloader/preloader.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/app/core/wrapper/wrapper.js",
+              "src/app/core/preloader/preloader.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "15kb",
+                  "maximumError": "30kb"
                 }
               ],
               "fileReplacements": [
@@ -70,10 +80,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "transenvios-shipping-web:build:production"
+              "browserTarget": "ng2angle:build:production"
             },
             "development": {
-              "browserTarget": "transenvios-shipping-web:build:development"
+              "browserTarget": "ng2angle:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "transenvios-shipping-web:build"
+            "browserTarget": "ng2angle:build"
           }
         },
         "test": {
@@ -97,13 +107,17 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/app/core/preloader/preloader.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/app/core/wrapper/wrapper.js",
+              "src/app/core/preloader/preloader.js"
+            ]
           }
         }
       }
     }
-  }
+  },
+  "defaultProject": "ng2angle"
 }

@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/transenvios-shipping-web'),
+      dir: require('path').join(__dirname, './coverage/ng2angle'),
       subdir: '.',
       reporters: [
         { type: 'html' },
