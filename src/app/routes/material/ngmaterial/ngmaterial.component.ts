@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
@@ -18,7 +18,7 @@ import { PizzaPartyComponent } from './snackbar.component';
 export class NgmaterialComponent implements OnInit {
 
     // Component - Autocomplete
-    stateCtrl: FormControl;
+    stateCtrl: UntypedFormControl;
     filteredStates: any;
     states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
     // Component - Checkbox
@@ -113,7 +113,7 @@ export class NgmaterialComponent implements OnInit {
 
     constructor(public dialog: MatDialog, public snackBar: MatSnackBar) {
         // Component - Autocomplete
-        this.stateCtrl = new FormControl();
+        this.stateCtrl = new UntypedFormControl();
         this.filteredStates = this.stateCtrl.valueChanges
             .pipe(startWith(null))
             .pipe(map(name => this.filterStates(name)));
