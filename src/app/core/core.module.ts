@@ -1,28 +1,28 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-
-import { SettingsService } from './settings/settings.service';
-import { ThemesService } from './themes/themes.service';
-import { TranslatorService } from './translator/translator.service';
-import { MenuService } from './menu/menu.service';
-
-import { throwIfAlreadyLoaded } from './module-import-guard';
+import { AuthModule } from 'app/core/auth/auth.module';
+import { IconsModule } from 'app/core/icons/icons.module';
+import { TranslocoCoreModule } from 'app/core/transloco/transloco.module';
 
 @NgModule({
     imports: [
-    ],
-    providers: [
-        SettingsService,
-        ThemesService,
-        TranslatorService,
-        MenuService
-    ],
-    declarations: [
-    ],
-    exports: [
+        AuthModule,
+        IconsModule,
+        TranslocoCoreModule
     ]
 })
-export class CoreModule {
-    constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
-        throwIfAlreadyLoaded(parentModule, 'CoreModule');
+export class CoreModule
+{
+    /**
+     * Constructor
+     */
+    constructor(
+        @Optional() @SkipSelf() parentModule?: CoreModule
+    )
+    {
+        // Do not allow multiple injections
+        if ( parentModule )
+        {
+            throw new Error('CoreModule has already been loaded. Import this module in the AppModule only.');
+        }
     }
 }
