@@ -4,6 +4,8 @@ jobs:
     working_directory: ~/transenvios-shipping-web
     docker:
       - image: cimg/node:18.10.0-browsers
+    environment:
+      - CHROME_BIN: /usr/lib/chromium/chrome
     steps:
       - checkout
       - restore_cache:
