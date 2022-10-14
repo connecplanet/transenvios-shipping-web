@@ -1,40 +1,52 @@
 import { NgModule } from '@angular/core';
+import { LayoutComponent } from 'app/layout/layout.component';
+import { EmptyLayoutModule } from 'app/layout/layouts/empty/empty.module';
+import { CenteredLayoutModule } from 'app/layout/layouts/horizontal/centered/centered.module';
+import { EnterpriseLayoutModule } from 'app/layout/layouts/horizontal/enterprise/enterprise.module';
+import { MaterialLayoutModule } from 'app/layout/layouts/horizontal/material/material.module';
+import { ModernLayoutModule } from 'app/layout/layouts/horizontal/modern/modern.module';
+import { ClassicLayoutModule } from 'app/layout/layouts/vertical/classic/classic.module';
+import { ClassyLayoutModule } from 'app/layout/layouts/vertical/classy/classy.module';
+import { CompactLayoutModule } from 'app/layout/layouts/vertical/compact/compact.module';
+import { DenseLayoutModule } from 'app/layout/layouts/vertical/dense/dense.module';
+import { FuturisticLayoutModule } from 'app/layout/layouts/vertical/futuristic/futuristic.module';
+import { ThinLayoutModule } from 'app/layout/layouts/vertical/thin/thin.module';
+import { SettingsModule } from 'app/layout/common/settings/settings.module';
+import { SharedModule } from 'app/shared/shared.module';
 
-import { LayoutComponent } from './layout.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { HeaderComponent } from './header/header.component';
-import { NavsearchComponent } from './header/navsearch/navsearch.component';
-import { OffsidebarComponent } from './offsidebar/offsidebar.component';
-import { UserblockComponent } from './sidebar/userblock/userblock.component';
-import { UserblockService } from './sidebar/userblock/userblock.service';
-import { FooterComponent } from './footer/footer.component';
+const layoutModules = [
+    // Empty
+    EmptyLayoutModule,
 
-import { SharedModule } from '../shared/shared.module';
+    // Horizontal navigation
+    CenteredLayoutModule,
+    EnterpriseLayoutModule,
+    MaterialLayoutModule,
+    ModernLayoutModule,
+
+    // Vertical navigation
+    ClassicLayoutModule,
+    ClassyLayoutModule,
+    CompactLayoutModule,
+    DenseLayoutModule,
+    FuturisticLayoutModule,
+    ThinLayoutModule
+];
 
 @NgModule({
-    imports: [
-        SharedModule
-    ],
-    providers: [
-        UserblockService
-    ],
     declarations: [
-        LayoutComponent,
-        SidebarComponent,
-        UserblockComponent,
-        HeaderComponent,
-        NavsearchComponent,
-        OffsidebarComponent,
-        FooterComponent
+        LayoutComponent
     ],
-    exports: [
+    imports     : [
+        SharedModule,
+        SettingsModule,
+        ...layoutModules
+    ],
+    exports     : [
         LayoutComponent,
-        SidebarComponent,
-        UserblockComponent,
-        HeaderComponent,
-        NavsearchComponent,
-        OffsidebarComponent,
-        FooterComponent
+        ...layoutModules
     ]
 })
-export class LayoutModule { }
+export class LayoutModule
+{
+}
