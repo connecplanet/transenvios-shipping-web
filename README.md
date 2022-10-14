@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice.  To 
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Set up continuous integration
+
+[Configure CLI for CI testing in Chrom](https://dev.to/obinnaogbonnajoseph/circle-ci-test-configuration-for-angular-projects-1o2p#configure)
+
+# User Histories
+
+[Trello Board](https://trello.com/b/39DWXgLA/transenvios)

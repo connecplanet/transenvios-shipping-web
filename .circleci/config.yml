@@ -6,16 +6,21 @@ jobs:
       - image: cimg/node:18.10.0-browsers
     steps:
       - checkout
+      - run:
+          name: "Show current branch"
+          command: echo ${CIRCLE_BRANCH}
       - restore_cache:
           key: transenvios-shipping-web-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
-          name: "Install packages"
+          name: "Install local dependencies"
           command: "npm install"
       - save_cache:
           key: transenvios-shipping-web-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - "node_modules"
-      - run: npm run test -- --no-watch --no-progress --code-coverage
+      - run:
+          name: "Testing"
+          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --code-coverage
 
 workflows:
   build-app:
