@@ -15,7 +15,7 @@ jobs:
           key: transenvios-shipping-web-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - "node_modules"
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --code-coverage
+      - run: ng test --browsers=Chrome_headless --watch=false --code-coverage
 
 workflows:
   build-app:
