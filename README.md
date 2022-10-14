@@ -29,6 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Set up continuous integration
 
 [Configure CLI for CI testing in Chrom](https://dev.to/obinnaogbonnajoseph/circle-ci-test-configuration-for-angular-projects-1o2p#configure)
+[Continuous integration for Angular applications](https://circleci.com/blog/continuous-integration-for-angular-applications/)
 
 # User Histories
 
