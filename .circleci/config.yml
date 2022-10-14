@@ -3,14 +3,14 @@ jobs:
   build:
     working_directory: ~/transenvios-shipping-web
     docker:
-      - image: circleci/node:10-browsers
+      - image: cimg/node:13.12-browsers
     steps:
       - checkout
       - restore_cache:
           key: transenvios-shipping-web-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
           name: "Install packages"
-          command: "npm install"      
+          command: "npm install"
       - save_cache:
           key: transenvios-shipping-web-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
