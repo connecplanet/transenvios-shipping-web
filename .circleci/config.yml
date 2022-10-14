@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/transenvios-shipping-web
     docker:
       - image: cimg/node:18.10.0-browsers
-          environment:
+          environment
             - CHROME_BIN=/usr/bin/google-chrome
     steps:
       - checkout
