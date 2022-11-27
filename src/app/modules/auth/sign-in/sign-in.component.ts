@@ -9,7 +9,8 @@ import { AuthService } from 'app/core/auth/auth.service';
     selector     : 'auth-sign-in',
     templateUrl  : './sign-in.component.html',
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations   : fuseAnimations,
+    styleUrls: ['./sign-in.component.scss']
 })
 export class AuthSignInComponent implements OnInit
 {
@@ -45,8 +46,8 @@ export class AuthSignInComponent implements OnInit
     {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email     : ['hughes.brian@company.com', [Validators.required, Validators.email]],
-            password  : ['admin', Validators.required],
+            email     : ['', [Validators.required, Validators.email]],
+            password  : ['', Validators.required],
             rememberMe: ['']
         });
     }
@@ -61,7 +62,7 @@ export class AuthSignInComponent implements OnInit
     signIn(): void
     {
         // Return if the form is invalid
-        if ( this.signInForm.invalid )
+        if (this.signInForm.invalid)
         {
             return;
         }

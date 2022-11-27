@@ -34,3 +34,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # User Histories
 
 [Trello Board](https://trello.com/b/39DWXgLA/transenvios)
+
+# Angular Template
+
+(Themeforest)[https://angular-material.fusetheme.com/docs/guides/customization/theming]
+(Mat Icos)[https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/]
