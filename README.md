@@ -37,5 +37,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Angular Template
 
-(Themeforest)[https://angular-material.fusetheme.com/docs/guides/customization/theming]
+(Themeforest-Introduction)[http://angular-material.fusetheme.com/docs/guides/getting-started/introduction]
+(Themeforest-Theming)[https://angular-material.fusetheme.com/docs/guides/customization/theming]
+(Themeforest-Support)[http://withinpixels.ticksy.com]
 (Mat Icos)[https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/]
