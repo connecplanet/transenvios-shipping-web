@@ -93,10 +93,12 @@ export class AuthSignInComponent implements OnInit
                     // Reset the form
                     this.signInNgForm.resetForm();
 
+                    const errorText = (response.status === 0) ? 'Unresponsive server error.' : 'Wrong email or password.';
+
                     // Set the alert
                     this.alert = {
                         type   : 'error',
-                        message: 'Wrong email or password'
+                        message: errorText
                     };
 
                     // Show the alert
