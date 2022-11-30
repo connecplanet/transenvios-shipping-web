@@ -18,12 +18,12 @@ import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
                         label: 'English'
                     },
                     {
-                        id   : 'tr',
-                        label: 'Turkish'
+                        id   : 'co',
+                        label: 'Español'
                     }
                 ],
-                defaultLang         : 'en',
-                fallbackLang        : 'en',
+                defaultLang         : 'co',
+                fallbackLang        : 'co',
                 reRenderOnLangChange: true,
                 prodMode            : environment.production
             })
