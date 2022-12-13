@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://localhost:7077'
+    apiUrl: 'http://transenvios-001-site1.htempurl.com'
 };
 
 /*
