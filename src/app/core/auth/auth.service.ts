@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class AuthService
@@ -47,17 +48,17 @@ export class AuthService
      */
     forgotPassword(email: string): Observable<any>
     {
-        return this._httpClient.post('api/auth/forgot-password', email);
+        return this._httpClient.post(`${environment.apiUrl}/api/users/ForgotPassword`, {email});
     }
 
     /**
-     * Reset password
+     * Reset email
      *
-     * @param password
+     * @param email
      */
-    resetPassword(password: string): Observable<any>
+    resetPassword(email: string): Observable<any>
     {
-        return this._httpClient.post('api/auth/reset-password', password);
+        return this._httpClient.post(`${environment.apiUrl}/api/users/Reset-Password`, {email});
     }
 
     /**
@@ -73,14 +74,27 @@ export class AuthService
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+        return this._httpClient.post(`${environment.apiUrl}/api/users/Authenticate`, credentials).pipe(
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
-                this.accessToken = response.accessToken;
+                this.accessToken = response.token ?? response.accessToken;
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
+
+                // Store the user on the user service
+                response.user = {
+                    id: response.id,
+                    name: response.name,
+                    email: response.email,
+                    avatar: 'assets/images/avatars/transenvios.png',
+                    status: 'online',
+                    firstName: response.firstName,
+                    lastName: response.lastName,
+                    countryCode: response.countryCode,
+                    phone: response.phone
+                };
 
                 // Store the user on the user service
                 this._userService.user = response.user;
@@ -97,7 +111,7 @@ export class AuthService
     signInUsingToken(): Observable<any>
     {
         // Sign in using the token
-        return this._httpClient.post('api/auth/sign-in-with-token', {
+        return this._httpClient.post(`${environment.apiUrl}/api/users/sign-in-with-token`, {
             accessToken: this.accessToken
         }).pipe(
             catchError(() =>
@@ -121,6 +135,19 @@ export class AuthService
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
+
+                // Transform the response
+                response.user = {
+                    id: response.user.id,
+                    name: response.user.name,
+                    email: response.user.email,
+                    avatar: 'assets/images/avatars/transenvios.png',
+                    status: 'online',
+                    firstName: response.user.firstName,
+                    lastName: response.user.lastName,
+                    countryCode: response.user.countryCode,
+                    phone: response.user.phone
+                };
 
                 // Store the user on the user service
                 this._userService.user = response.user;
@@ -153,7 +180,7 @@ export class AuthService
      */
     signUp(user: { name: string; email: string; password: string; company: string }): Observable<any>
     {
-        return this._httpClient.post('api/auth/sign-up', user);
+        return this._httpClient.post(`${environment.apiUrl}/api/users`, user);
     }
 
     /**
@@ -163,7 +190,7 @@ export class AuthService
      */
     unlockSession(credentials: { email: string; password: string }): Observable<any>
     {
-        return this._httpClient.post('api/auth/unlock-session', credentials);
+        return this._httpClient.post(`${environment.apiUrl}/api/users/unlock-session`, credentials);
     }
 
     /**
