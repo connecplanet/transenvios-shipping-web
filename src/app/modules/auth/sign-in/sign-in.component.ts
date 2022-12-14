@@ -9,8 +9,7 @@ import { AuthService } from 'app/core/auth/auth.service';
     selector     : 'auth-sign-in',
     templateUrl  : './sign-in.component.html',
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations,
-    styleUrls: ['./sign-in.component.scss']
+    animations   : fuseAnimations
 })
 export class AuthSignInComponent implements OnInit
 {
@@ -46,8 +45,8 @@ export class AuthSignInComponent implements OnInit
     {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email     : ['', [Validators.required, Validators.email]],
-            password  : ['', Validators.required],
+            email     : ['hughes.brian@company.com', [Validators.required, Validators.email]],
+            password  : ['admin', Validators.required],
             rememberMe: ['']
         });
     }
@@ -62,7 +61,7 @@ export class AuthSignInComponent implements OnInit
     signIn(): void
     {
         // Return if the form is invalid
-        if (this.signInForm.invalid)
+        if ( this.signInForm.invalid )
         {
             return;
         }
@@ -77,6 +76,7 @@ export class AuthSignInComponent implements OnInit
         this._authService.signIn(this.signInForm.value)
             .subscribe(
                 () => {
+
                     // Set the redirect url.
                     // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
                     // to the correct page after a successful sign in. This way, that url can be set via
@@ -85,20 +85,20 @@ export class AuthSignInComponent implements OnInit
 
                     // Navigate to the redirect url
                     this._router.navigateByUrl(redirectURL);
+
                 },
                 (response) => {
+
                     // Re-enable the form
                     this.signInForm.enable();
 
                     // Reset the form
                     this.signInNgForm.resetForm();
 
-                    const errorText = (response.status === 0) ? 'Unresponsive server error.' : 'Wrong email or password.';
-
                     // Set the alert
                     this.alert = {
                         type   : 'error',
-                        message: errorText
+                        message: 'Wrong email or password'
                     };
 
                     // Show the alert
