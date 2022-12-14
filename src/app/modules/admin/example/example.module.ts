@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { ExampleComponent } from 'app/modules/admin/example/example.component';
-import { UsersComponent } from 'app/modules/admin/user-admin/users.component';
+import { ClientsComponent } from 'app/modules/admin/clients-admin/clients.component';
+import { DriversComponent } from 'app/modules/admin/drivers-admin/drivers.component';
 
 const exampleRoutes: Route[] = [
     {
@@ -9,8 +10,12 @@ const exampleRoutes: Route[] = [
         component: ExampleComponent
     },
     {
-        path     : 'users',
-        component: UsersComponent
+        path     : 'clients',
+        component: ClientsComponent
+    },
+    {
+        path     : 'drivers',
+        component: DriversComponent
     }
 ];
 

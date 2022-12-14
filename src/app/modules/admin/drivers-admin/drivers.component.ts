@@ -1,22 +1,22 @@
-import { UsersAdminService } from './../../../core/user-admin/user-admin.service';
+import { ClientAdminService } from '../../../core/clients/clients.service';
 import { Component, ViewEncapsulation, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
-import { UserDialogComponent } from './component/user-dialog.component';
-import { User, } from 'app/core/user-admin/users.types';
+import { DriversDialogComponent } from './components/drivers-dialog.component';
+import { Driver } from 'app/core/drivers/drivers.types';
 import { MatPaginator } from '@angular/material/paginator';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { FuseAlertService } from '@fuse/components/alert';
 
 
 @Component({
-    selector: 'users',
-    templateUrl: './users.component.html',
+    selector: 'drivers',
+    templateUrl: './drivers.component.html',
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class UsersComponent implements OnInit {
+export class DriversComponent implements OnInit {
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
     displayedColumns: string[] = ['documentType', 'documentNumber', 'firstName', 'lastName', 'phone', 'email', 'actions'];
 
@@ -31,7 +31,7 @@ export class UsersComponent implements OnInit {
 
     constructor(
         private _matDialog: MatDialog,
-        private _userAdminService: UsersAdminService,
+        private _clientAdminService: ClientAdminService,
         private _fuseConfirmationService: FuseConfirmationService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseAlertService: FuseAlertService
@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._userAdminService.get().subscribe((response) => {
+        this._clientAdminService.get().subscribe((response) => {
             this.dataSource.data = response;
         });
     }
@@ -48,40 +48,40 @@ export class UsersComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
     }
 
-    editUser(user: User): void {
-        const dialogRef = this._matDialog.open(UserDialogComponent, {
+    editUser(driver: Driver): void {
+        const dialogRef = this._matDialog.open(DriversDialogComponent, {
             data: {
-                user
+                driver
             }
         });
 
         dialogRef.afterClosed()
             .subscribe((response) => {
-                if (response.event === 'saveUser') {
+                if (response.event === 'saveDriver') {
                     const update = response.data;
-                    this._userAdminService.update(update).subscribe((response) => {
+                    this._clientAdminService.update(update).subscribe((response) => {
                         this.dataSource.data = this.dataSource.data.map((item) => {
                             if (item.id === update.id) {
                                 item = update;
                             }
                             return item;
                         });
-                    });
 
-                    this.alertConf['type'] = "success";
-                    this.alertConf['message'] = "Usuario modificado correctamente";
-                    this._fuseAlertService.show('alertBox1')
+                        this.alertConf['type'] = "success";
+                        this.alertConf['message'] = "Conductor modificado correctamente";
+                        this._fuseAlertService.show('alertBox1')
 
-                    setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
+                        setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
 
+                    });     
                 }
             });
     }
 
-    deleteUser(user: User): void {
+    deleteUser(client: Driver): void {
         const confirmation = this._fuseConfirmationService.open({
-            title: 'Eliminar Usuario',
-            message: 'Estas seguro de eliminar el usuario, esta accion no podra ser revertida una vez completada',
+            title: 'Eliminar Conductor',
+            message: 'Estas seguro de eliminar el conductor, esta accion no podra ser revertida una vez completada',
             actions: {
                 confirm: {
                     label: 'Eliminar'
@@ -94,10 +94,10 @@ export class UsersComponent implements OnInit {
 
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
-                this._userAdminService.delete(user.id).subscribe(() => {
-                    this.dataSource.data = this.dataSource.data.filter(item => item.id !== user.id);
+                this._clientAdminService.delete(client.id).subscribe(() => {
+                    this.dataSource.data = this.dataSource.data.filter(item => item.id !== client.id);
                     this.alertConf['type'] = "success";
-                    this.alertConf['message'] = "Usuario eliminado correctamente";
+                    this.alertConf['message'] = "Conductor eliminado correctamente";
                     this._fuseAlertService.show('alertBox1')
 
                     setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);

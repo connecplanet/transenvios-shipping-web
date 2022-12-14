@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, ReplaySubject, tap } from 'rxjs';
-import { User } from 'app/core/user-admin/users.types';
+import { Client } from 'app/core/clients/clients.types';
 import { environment } from 'environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UsersAdminService
+export class ClientAdminService
 {
-    private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
+    private _client: ReplaySubject<Client> = new ReplaySubject<Client>(1);
 
     /**
      * Constructor
@@ -27,15 +27,15 @@ export class UsersAdminService
      *
      * @param value
      */
-    set user(value: User)
+    set user(value: Client)
     {
         // Store the value
-        this._user.next(value);
+        this._client.next(value);
     }
 
-    get user$(): Observable<User>
+    get user$(): Observable<Client>
     {
-        return this._user.asObservable();
+        return this._client.asObservable();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -45,21 +45,21 @@ export class UsersAdminService
     /**
      * Get list of users
      */
-    get(): Observable<User[]>
+    get(): Observable<Client[]>
     {
-        return this._httpClient.get<User[]>(`${environment.apiUrl}/api/Users`);
+        return this._httpClient.get<Client[]>(`${environment.apiUrl}/api/Users`);
     }
 
     /**
      * Update the user
      *
-     * @param user
+     * @param client
      */
-    update(user: User): Observable<any>
+    update(client: Client): Observable<any>
     {
-        return this._httpClient.put<User>(`${environment.apiUrl}/api/Users/${user.id}`, user).pipe(
+        return this._httpClient.put<Client>(`${environment.apiUrl}/api/Users/${client.id}`, client).pipe(
             map((response) => {
-                this._user.next(response);
+                this._client.next(response);
             })
         );
     }
@@ -67,7 +67,7 @@ export class UsersAdminService
      /**
      * Update the user
      *
-     * @param user
+     * @param id
      */
      delete(id: string): Observable<any>
      {
