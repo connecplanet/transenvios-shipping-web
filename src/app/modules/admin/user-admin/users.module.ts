@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from 'app/modules/admin/user-admin/users.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator'; 
 import { MatIconModule } from '@angular/material/icon';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,6 +27,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     imports     : [
         FuseAlertModule,
         MatTableModule,
+        MatPaginatorModule,
         MatIconModule,
         MatButtonModule,
         MatFormFieldModule,

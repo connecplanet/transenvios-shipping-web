@@ -57,10 +57,20 @@ export class UsersAdminService
      */
     update(user: User): Observable<any>
     {
-        return this._httpClient.patch<User>('api/common/user', {user}).pipe(
+        return this._httpClient.put<User>(`${environment.apiUrl}/api/Users/${user.id}`, user).pipe(
             map((response) => {
                 this._user.next(response);
             })
         );
     }
+
+     /**
+     * Update the user
+     *
+     * @param user
+     */
+     delete(id: string): Observable<any>
+     {
+         return this._httpClient.delete(`${environment.apiUrl}/api/Users/${id}`);
+     }
 }

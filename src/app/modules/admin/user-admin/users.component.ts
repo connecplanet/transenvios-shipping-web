@@ -1,82 +1,110 @@
 import { UsersAdminService } from './../../../core/user-admin/user-admin.service';
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertType } from '@fuse/components/alert';
-import { UserDialogComponent} from './component/user-dialog.component';
+import { UserDialogComponent } from './component/user-dialog.component';
 import { User, } from 'app/core/user-admin/users.types';
+import { MatPaginator } from '@angular/material/paginator';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { FuseAlertService } from '@fuse/components/alert';
 
-
-// const USERS_DATA: User[] = [
-//     {documentType: 'C.C', documentNumber: '123456', name: 'Carlos', lastName: 'Cano', phone: '3218910831', mail: 'carlos@gmail.com'},
-//     {documentType: 'C.C', documentNumber: '123457', name: 'Andres', lastName: 'Cardenas', phone: '3218910831', mail: 'carlos@gmail.com'},
-// ];
 
 @Component({
-    selector     : 'users',
-    templateUrl  : './users.component.html',
+    selector: 'users',
+    templateUrl: './users.component.html',
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations: fuseAnimations
 })
-export class UsersComponent implements OnInit
-{
+export class UsersComponent implements OnInit {
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
-    displayedColumns: string[] = ['documentType', 'documentNumber', 'name', 'lastName', 'phone', 'mail', 'actions'];
+    displayedColumns: string[] = ['documentType', 'documentNumber', 'firstName', 'lastName', 'phone', 'email', 'actions'];
 
-    alert: { type: FuseAlertType; message: string } = {
-        type   : 'success',
-        message: ''
-    };
-    showAlert: boolean = false;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    alertConf: {
+        type: string,
+        title: string,
+        message: string
+    } = { type: '', title: '', message: '' };
 
 
     constructor(
         private _matDialog: MatDialog,
-        private _userAdminService: UsersAdminService
-    )  {}
+        private _userAdminService: UsersAdminService,
+        private _fuseConfirmationService: FuseConfirmationService,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _fuseAlertService: FuseAlertService
+    ) {
+    }
 
-    ngOnInit(): void
-    {
-        // this.dataSource.data
+    ngOnInit(): void {
         this._userAdminService.get().subscribe((response) => {
             this.dataSource.data = response;
         });
     }
 
-    editUser(user: User): void
-    {
-        const dialogRef = this._matDialog.open(UserDialogComponent, {
-            data: {
-              user
-            }
-          });
-
-        dialogRef.afterClosed()
-        .subscribe((response) => {
-            if(response.event === 'saveUser'){
-                const update = response.data;
-                this.dataSource.data = this.dataSource.data.map((item) => {
-                        if(item.documentNumber === update.documentNumber) {
-                            item = update;
-                        }
-                        return item;
-                });
-
-                this.alert = {
-                    type   : 'success',  message: 'Usuario modificado correctamente.'
-                };
-            }
-        });
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
     }
 
-    deleteUser(user: User): void
-    {
-        this.dataSource.data = this.dataSource.data.filter(item => item.documentNumber !== user.documentNumber);
+    editUser(user: User): void {
+        const dialogRef = this._matDialog.open(UserDialogComponent, {
+            data: {
+                user
+            }
+        });
 
-        this.alert = {
-            type   : 'warning',
-            message: 'Usuario eliminado correctamente.'
-        };
+        dialogRef.afterClosed()
+            .subscribe((response) => {
+                if (response.event === 'saveUser') {
+                    const update = response.data;
+                    this._userAdminService.update(update).subscribe((response) => {
+                        this.dataSource.data = this.dataSource.data.map((item) => {
+                            if (item.id === update.id) {
+                                item = update;
+                            }
+                            return item;
+                        });
+                    });
+
+                    this.alertConf['type'] = "success";
+                    this.alertConf['message'] = "Usuario modificado correctamente";
+                    this._fuseAlertService.show('alertBox1')
+
+                    setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
+
+                }
+            });
+    }
+
+    deleteUser(user: User): void {
+        const confirmation = this._fuseConfirmationService.open({
+            title: 'Eliminar Usuario',
+            message: 'Estas seguro de eliminar el usuario, esta accion no podra ser revertida una vez completada',
+            actions: {
+                confirm: {
+                    label: 'Eliminar'
+                },
+                cancel: {
+                    label: 'Cancelar'
+                }
+            }
+        });
+
+        confirmation.afterClosed().subscribe((result) => {
+            if (result === 'confirmed') {
+                this._userAdminService.delete(user.id).subscribe(() => {
+                    this.dataSource.data = this.dataSource.data.filter(item => item.id !== user.id);
+                    this.alertConf['type'] = "success";
+                    this.alertConf['message'] = "Usuario eliminado correctamente";
+                    this._fuseAlertService.show('alertBox1')
+
+                    setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
+                });
+                this._changeDetectorRef.markForCheck();
+            }
+        });
+
     }
 }

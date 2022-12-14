@@ -14,9 +14,9 @@
     <!-- To -->
     <mat-form-field>
       <mat-label>Tipo Documento</mat-label>
-      <input matInput [formControlName]="'documentType'">
-      <button mat-icon-button type="button" matSuffix>
-        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'" (click)="clearInput('documentType')">
+      <input matInput [formControlName]="'documentType'" disabled>
+      <button mat-icon-button type="button" matSuffix disabled>
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'" >
         </mat-icon>
       </button>
     </mat-form-field>
@@ -24,9 +24,9 @@
 
     <mat-form-field>
       <mat-label>Numero Documento</mat-label>
-      <input matInput [formControlName]="'documentNumber'">
-      <button mat-icon-button type="button" matSuffix>
-        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'" (click)="clearInput('documentNumber')">
+      <input matInput [formControlName]="'documentNumber'" disabled>
+      <button mat-icon-button type="button" matSuffix disabled>
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
         </mat-icon>
       </button>
     </mat-form-field>

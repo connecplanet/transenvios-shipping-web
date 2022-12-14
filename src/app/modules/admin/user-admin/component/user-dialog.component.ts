@@ -34,6 +34,7 @@ export class UserDialogComponent implements OnInit
         this.countries = countries;
 
         this.composeForm = this._formBuilder.group({
+            id     : [this.user.id, []],
             // documentType     : [this.user.documentType, [Validators.required]],
             // documentNumber     : [this.user.documentNumber, [Validators.required]],
             documentType     : [this.user.documentType, []],
@@ -42,28 +43,26 @@ export class UserDialogComponent implements OnInit
             lastName     : [this.user.lastName, [Validators.required]],
             phone     : [this.user.phone, [Validators.required]],
             email     : [this.user.email, [Validators.required, Validators.email]],
-            country: ['+57', [Validators.required]],
+            country: ['co', [Validators.required]],
         });
     }
 
-    discard(): void
-    {
+    discard(): void {
       this.matDialogRef.close();
     }
 
-    save(): void
-    {
+    save(): void {
+        debugger;
         this.matDialogRef.close({event: 'saveUser', data: this.composeForm.getRawValue() });
     }
 
-    clearInput(inputName: string): void{
-        const options = `this.composeForm.patchValue({${inputName}: ''})`;
-        eval(options);
+    clearInput(inputName: string): void {
+        eval(`this.composeForm.patchValue({${inputName}: ''})`);
     }
 
      getCountryByCode(): Country
      {
-        const code  = this.composeForm.get('country').value;
-        return this.countries.find(country => country.code === code);
+        const iso  = this.composeForm.get('country').value;
+        return this.countries.find(country => country.iso === iso);
      }
 }
