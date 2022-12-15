@@ -4,7 +4,9 @@ import { DateTime } from 'luxon';
 /* Get the current instant */
 const now = DateTime.now();
 
-export const messages = [
+export const messages = [];
+
+export const messagesConpla = [
     {
         id         : '832276cc-c5e9-4fcc-8e23-d38e2e267bc9',
         image      : 'assets/images/avatars/male-01.jpg',
