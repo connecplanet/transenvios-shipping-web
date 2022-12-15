@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FuseConfigService } from '@fuse/services/config';
-import { appConfig, AppConfig, Scheme, Theme, Themes } from 'app/core/config/app.config';
+import { AppConfig, Scheme, Theme, Themes } from 'app/core/config/app.config';
 import { Layout } from 'app/layout/layout.types';
 
 @Component({
@@ -34,7 +34,6 @@ export class SettingsComponent implements OnInit, OnDestroy
     scheme: 'dark' | 'light';
     theme: string;
     themes: Themes;
-    appSettingsEnable: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -45,7 +44,6 @@ export class SettingsComponent implements OnInit, OnDestroy
         private _fuseConfigService: FuseConfigService
     )
     {
-        this.appSettingsEnable = appConfig.features.appSettings;
     }
 
     // -----------------------------------------------------------------------------------------------------
