@@ -25,3 +25,21 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice.  To 
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Set up continuous integration
+
+[Configure CLI for CI testing in Chrom](https://dev.to/obinnaogbonnajoseph/circle-ci-test-configuration-for-angular-projects-1o2p#configure)
+[Continuous integration for Angular applications](https://circleci.com/blog/continuous-integration-for-angular-applications/)
+
+# User Histories
+
+[Trello Board](https://trello.com/b/39DWXgLA/transenvios)
+
+# Angular Template
+
+(Themeforest-Introduction)[http://angular-material.fusetheme.com/docs/guides/getting-started/introduction]
+(Themeforest-Theming)[https://angular-material.fusetheme.com/docs/guides/customization/theming]
+(Themeforest-Support)[http://withinpixels.ticksy.com]
+(Mat Icos)[https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/]
+(Building and serving Angular apps)[https://angular.io/guide/build]
+(Configure and build Angular application for different environments)[https://balramchavan.medium.com/configure-and-build-angular-application-for-different-environments-7e94a3c0af23]

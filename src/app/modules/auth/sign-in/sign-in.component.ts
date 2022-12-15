@@ -9,7 +9,8 @@ import { AuthService } from 'app/core/auth/auth.service';
     selector     : 'auth-sign-in',
     templateUrl  : './sign-in.component.html',
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations   : fuseAnimations,
+    styleUrls: ['./sign-in-conpla.component.scss']
 })
 export class AuthSignInComponent implements OnInit
 {
@@ -45,8 +46,8 @@ export class AuthSignInComponent implements OnInit
     {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email     : ['hughes.brian@company.com', [Validators.required, Validators.email]],
-            password  : ['admin', Validators.required],
+            email     : ['', [Validators.required, Validators.email]],
+            password  : ['', Validators.required],
             rememberMe: ['']
         });
     }
@@ -95,10 +96,13 @@ export class AuthSignInComponent implements OnInit
                     // Reset the form
                     this.signInNgForm.resetForm();
 
+                    // Define the correct message
+                    const errorText = (response.status === 0) ? 'Unresponsive server error.' : 'Wrong email or password.';
+
                     // Set the alert
                     this.alert = {
                         type   : 'error',
-                        message: 'Wrong email or password'
+                        message: errorText
                     };
 
                     // Show the alert
