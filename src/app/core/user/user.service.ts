@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, ReplaySubject, tap } from 'rxjs';
 import { User } from 'app/core/user/user.types';
+import { environment } from 'environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -44,9 +45,9 @@ export class UserService
     /**
      * Get the current logged in user data
      */
-    get(): Observable<User>
+    get(id: string): Observable<User>
     {
-        return this._httpClient.get<User>('api/common/user').pipe(
+        return this._httpClient.get<User>(`${environment.apiUrl}/api/users/{id}`).pipe(
             tap((user) => {
                 this._user.next(user);
             })
@@ -60,7 +61,7 @@ export class UserService
      */
     update(user: User): Observable<any>
     {
-        return this._httpClient.patch<User>('api/common/user', {user}).pipe(
+        return this._httpClient.patch<User>(`${environment.apiUrl}/api/users`, {user}).pipe(
             map((response) => {
                 this._user.next(response);
             })

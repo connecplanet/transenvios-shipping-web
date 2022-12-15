@@ -17,7 +17,7 @@
 
             <!-- Alert -->
             <fuse-alert
-                class="mt-8 -mb-4"
+                class="mt-8"
                 *ngIf="showAlert"
                 [appearance]="'outline'"
                 [showIcon]="false"
@@ -69,14 +69,15 @@
                 </mat-form-field>
 
                 <!-- Actions -->
-                <div class="inline-flex items-end justify-between w-full mt-1.5">
+                <div class="inline-flex items-center justify-between w-full mt-1.5">
                     <mat-checkbox
+                        class="-ml-2"
                         [color]="'primary'"
                         [formControlName]="'rememberMe'">
                         Recordar usuario
                     </mat-checkbox>
                     <a
-                        class="text-md font-medium text-primary-500 hover:underline te-forgot-password"
+                        class="text-md font-medium text-primary-500 hover:underline"
                         [routerLink]="['/forgot-password']">Recuperar contraseña
                     </a>
                 </div>

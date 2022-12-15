@@ -9,6 +9,12 @@ const now = DateTime.now();
  * to keep the demo data maintainable.
  */
 const _attachments = {
+    media: [],
+    docs : [],
+    links: []
+};
+
+const _attachmentsConpla = {
     media: [
         'assets/images/cards/01-320x200.jpg',
         'assets/images/cards/02-320x200.jpg',
@@ -29,7 +35,9 @@ const _attachments = {
  *  left empty. We will be using this same conversation for each chat
  *  to keep things more maintainable for the demo.
  */
-export const messages = [
+export const messages = [];
+
+export const messagesConpla = [
     {
         id       : 'e6b2b82f-b199-4a60-9696-5f3e40d2715d',
         chatId   : '',
@@ -206,7 +214,10 @@ export const messages = [
         createdAt: now.set({hour: 13, minute: 0}).toISO()
     }
 ];
-export const chats = [
+
+export const chats = [];
+
+export const chatsConpla = [
     {
         id           : 'ff6bc7f1-449a-4419-af62-b89ce6cae0aa',
         contactId    : '9d3f0e7f-dcbd-4e56-a5e8-87b8154e9edf',
@@ -327,7 +338,10 @@ export const chats = [
         lastMessageAt: '26/04/2021'
     }
 ];
-export const contacts = [
+
+export const contacts = [];
+
+export const contactsConpla = [
     {
         id         : 'cd5fa417-b667-482d-b208-798d9da3213c',
         avatar     : 'assets/images/avatars/male-01.jpg',

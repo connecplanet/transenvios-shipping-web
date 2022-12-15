@@ -4,7 +4,6 @@ import { ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { Subject, takeUntil } from 'rxjs';
 import { QuickChatService } from 'app/layout/common/quick-chat/quick-chat.service';
 import { Chat } from 'app/layout/common/quick-chat/quick-chat.types';
-import { appConfig } from 'app/core/config/app.config';
 
 @Component({
     selector     : 'quick-chat',
@@ -20,7 +19,6 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
     chats: Chat[];
     opened: boolean = false;
     selectedChat: Chat;
-    teamChatEnable: boolean = true;
     private _mutationObserver: MutationObserver;
     private _scrollStrategy: ScrollStrategy = this._scrollStrategyOptions.block();
     private _overlay: HTMLElement;
@@ -38,7 +36,6 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
         private _scrollStrategyOptions: ScrollStrategyOptions
     )
     {
-        this.teamChatEnable = appConfig.features.teamChat;
     }
 
     // -----------------------------------------------------------------------------------------------------
