@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, ReplaySubject, tap } from 'rxjs';
-import { Client } from 'app/core/clients/clients.types';
+import { City } from 'app/core/cities/cities.types';
 import { environment } from 'environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ClientAdminService
+export class CitiesService
 {
-    private _client: ReplaySubject<Client> = new ReplaySubject<Client>(1);
+    private _city: ReplaySubject<City> = new ReplaySubject<City>(1);
 
     /**
      * Constructor
@@ -27,15 +27,15 @@ export class ClientAdminService
      *
      * @param value
      */
-    set user(value: Client)
+    set user(value: City)
     {
         // Store the value
-        this._client.next(value);
+        this._city.next(value);
     }
 
-    get user$(): Observable<Client>
+    get user$(): Observable<City>
     {
-        return this._client.asObservable();
+        return this._city.asObservable();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -43,34 +43,10 @@ export class ClientAdminService
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Get list of users
+     * Get list of cities
      */
-    get(): Observable<Client[]>
+    get(): Observable<City[]>
     {
-        return this._httpClient.get<Client[]>(`${environment.apiUrl}/api/Clients`);
+        return this._httpClient.get<City[]>(`${environment.apiUrl}/api/Cities`);
     }
-
-    /**
-     * Update the user
-     *
-     * @param client
-     */
-    update(client: Client): Observable<any>
-    {
-        return this._httpClient.put<Client>(`${environment.apiUrl}/api/Clients/${client.id}`, client).pipe(
-            map((response) => {
-                this._client.next(response);
-            })
-        );
-    }
-
-     /**
-     * Update the user
-     *
-     * @param id
-     */
-     delete(id: string): Observable<any>
-     {
-         return this._httpClient.delete(`${environment.apiUrl}/api/Clients/${id}`);
-     }
 }

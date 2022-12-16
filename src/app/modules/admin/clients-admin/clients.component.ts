@@ -18,7 +18,7 @@ import { FuseAlertService } from '@fuse/components/alert';
 })
 export class ClientsComponent implements OnInit {
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
-    displayedColumns: string[] = ['documentType', 'documentNumber', 'firstName', 'lastName', 'phone', 'email', 'actions'];
+    displayedColumns: string[] = ['documentType', 'documentId', 'firstName', 'lastName', 'phone', 'email', 'actions'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 

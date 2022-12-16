@@ -1,4 +1,5 @@
-import { ClientAdminService } from '../../../core/clients/clients.service';
+import { DriverAdminService } from '../../../core/drivers/drivers.service';
+import { CitiesService } from '../../../core/cities/cities.service';
 import { Component, ViewEncapsulation, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +9,7 @@ import { Driver } from 'app/core/drivers/drivers.types';
 import { MatPaginator } from '@angular/material/paginator';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { FuseAlertService } from '@fuse/components/alert';
+import { City } from 'app/core/cities/cities.types';
 
 
 @Component({
@@ -19,6 +21,7 @@ import { FuseAlertService } from '@fuse/components/alert';
 export class DriversComponent implements OnInit {
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
     displayedColumns: string[] = ['documentType', 'documentNumber', 'firstName', 'lastName', 'phone', 'email', 'actions'];
+    cities: City[];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -31,7 +34,8 @@ export class DriversComponent implements OnInit {
 
     constructor(
         private _matDialog: MatDialog,
-        private _clientAdminService: ClientAdminService,
+        private _driverAdminService: DriverAdminService,
+        private _citiesService: CitiesService,
         private _fuseConfirmationService: FuseConfirmationService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseAlertService: FuseAlertService
@@ -39,7 +43,15 @@ export class DriversComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._clientAdminService.get().subscribe((response) => {
+        this.getAllDrivers();
+        
+        this._citiesService.get().subscribe((response) => {
+            this.cities = response;
+        })
+    }
+
+    getAllDrivers(){
+        this._driverAdminService.get().subscribe((response) => {
             this.dataSource.data = response;
         });
     }
@@ -49,9 +61,11 @@ export class DriversComponent implements OnInit {
     }
 
     editUser(driver: Driver): void {
+        const objCities = this.cities;
         const dialogRef = this._matDialog.open(DriversDialogComponent, {
             data: {
-                driver
+                driver,
+                objCities
             }
         });
 
@@ -59,7 +73,7 @@ export class DriversComponent implements OnInit {
             .subscribe((response) => {
                 if (response.event === 'saveDriver') {
                     const update = response.data;
-                    this._clientAdminService.update(update).subscribe((response) => {
+                    this._driverAdminService.update(update).subscribe((response) => {
                         this.dataSource.data = this.dataSource.data.map((item) => {
                             if (item.id === update.id) {
                                 item = update;
@@ -69,6 +83,32 @@ export class DriversComponent implements OnInit {
 
                         this.alertConf['type'] = "success";
                         this.alertConf['message'] = "Conductor modificado correctamente";
+                        this._fuseAlertService.show('alertBox1')
+
+                        setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
+
+                    });     
+                }
+            });
+    }
+
+    addDriver(): void {
+        const objCities = this.cities;
+        const dialogRef = this._matDialog.open(DriversDialogComponent, {
+            data: {
+                objCities
+            }
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((response) => {
+                if (response.event === 'addDriver') {
+                    let objAdd = response.data;
+                    this._driverAdminService.create(objAdd).subscribe((response) => {
+                        this.getAllDrivers();
+
+                        this.alertConf['type'] = "success";
+                        this.alertConf['message'] = "Conductor creado correctamente";
                         this._fuseAlertService.show('alertBox1')
 
                         setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
@@ -94,7 +134,7 @@ export class DriversComponent implements OnInit {
 
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
-                this._clientAdminService.delete(client.id).subscribe(() => {
+                this._driverAdminService.delete(client.id).subscribe(() => {
                     this.dataSource.data = this.dataSource.data.filter(item => item.id !== client.id);
                     this.alertConf['type'] = "success";
                     this.alertConf['message'] = "Conductor eliminado correctamente";

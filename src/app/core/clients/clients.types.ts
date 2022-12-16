@@ -2,7 +2,7 @@ export interface Client
 {
     id: string;
     documentType?: string;
-    documentNumber?: string;
+    documentId?: string;
     firstName: string;
     lastName: string;
     email: string;

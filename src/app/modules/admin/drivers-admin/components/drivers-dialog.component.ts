@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Inject, ChangeDetectorRef, Injector } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { City } from 'app/core/cities/cities.types';
 import { Driver, Country } from 'app/core/drivers/drivers.types';
 import {countries } from 'app/mock-api/apps/users/data';
 import { Subject, takeUntil } from 'rxjs';
@@ -15,8 +16,10 @@ import { Subject, takeUntil } from 'rxjs';
 export class DriversDialogComponent implements OnInit
 {
     composeForm: UntypedFormGroup;
+    isCreate: boolean = false;
     driver: Driver;
     countries: Country[];
+    cities: City[];
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -27,6 +30,9 @@ export class DriversDialogComponent implements OnInit
     )
     {
         this.driver = dialogData['driver'];
+        this.cities = dialogData['objCities'];
+        debugger;
+        this.isCreate = (this.driver == null)
     }
 
     ngOnInit(): void
@@ -34,16 +40,16 @@ export class DriversDialogComponent implements OnInit
         this.countries = countries;
 
         this.composeForm = this._formBuilder.group({
-            id     : [this.driver.id, []],
-            // documentType     : [this.driver.documentType, [Validators.required]],
-            // documentNumber     : [this.driver.documentNumber, [Validators.required]],
-            documentType     : [this.driver.documentType, []],
-            documentNumber     : [this.driver.documentNumber, []],
-            firstName     : [this.driver.firstName, [Validators.required]],
-            lastName     : [this.driver.lastName, [Validators.required]],
-            phone     : [this.driver.phone, [Validators.required]],
-            email     : [this.driver.email, [Validators.required, Validators.email]],
+            id     : [this.driver?.id, []],
+            documentType     : [this.driver?.documentType, [Validators.required]],
+            documentId     : [this.driver?.documentId, [Validators.required]],
+            firstName     : [this.driver?.firstName, [Validators.required]],
+            lastName     : [this.driver?.lastName, [Validators.required]],
+            phone     : [this.driver?.phone, [Validators.required]],
+            email     : [this.driver?.email, [Validators.required, Validators.email]],
             country: ['co', [Validators.required]],
+            pickUpCityId: [this.driver?.pickUpCityId, [Validators.required]],
+            pickUpAddress: [this.driver?.pickUpAddress, [Validators.required]],
         });
     }
 
@@ -52,7 +58,8 @@ export class DriversDialogComponent implements OnInit
     }
 
     save(): void {
-        this.matDialogRef.close({event: 'saveDriver', data: this.composeForm.getRawValue() });
+        if(this.composeForm.valid)
+            this.matDialogRef.close({event: this.isCreate ?'addDriver' :'saveDriver', data: this.composeForm.getRawValue() });
     }
 
     clearInput(inputName: string): void {

@@ -17,7 +17,7 @@
         </ng-container>
         <ng-container matColumnDef="documentNumber">
           <th mat-header-cell *matHeaderCellDef class="bg-gray-200"> # Documento </th>
-          <td mat-cell *matCellDef="let element"> {{element.documentNumber}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.documentId}} </td>
         </ng-container>
         <ng-container matColumnDef="firstName">
           <th mat-header-cell *matHeaderCellDef class="bg-gray-200"> Nombre </th>
@@ -53,6 +53,10 @@
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
       </mat-paginator>
     </div>
+      <button type="button" class="flex items-center text-on-primary sm:order-last justify-end bg-blue-900" mat-stroked-button (click)="addDriver()">
+        Agregar Conductor
+      </button>
   </div>
+      
 
 </div>

@@ -38,7 +38,7 @@ export class ClientsDialogComponent implements OnInit
             // documentType     : [this.client.documentType, [Validators.required]],
             // documentNumber     : [this.client.documentNumber, [Validators.required]],
             documentType     : [this.client.documentType, []],
-            documentNumber     : [this.client.documentNumber, []],
+            documentId     : [this.client.documentId, []],
             firstName     : [this.client.firstName, [Validators.required]],
             lastName     : [this.client.lastName, [Validators.required]],
             phone     : [this.client.phone, [Validators.required]],

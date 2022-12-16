@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class ClientAdminService
+export class DriverAdminService
 {
     private _driver: ReplaySubject<Driver> = new ReplaySubject<Driver>(1);
 
@@ -47,7 +47,7 @@ export class ClientAdminService
      */
     get(): Observable<Driver[]>
     {
-        return this._httpClient.get<Driver[]>(`${environment.apiUrl}/api/Users`);
+        return this._httpClient.get<Driver[]>(`${environment.apiUrl}/api/Drivers`);
     }
 
     /**
@@ -57,7 +57,21 @@ export class ClientAdminService
      */
     update(driver: Driver): Observable<any>
     {
-        return this._httpClient.put<Driver>(`${environment.apiUrl}/api/Users/${driver.id}`, driver).pipe(
+        return this._httpClient.put<Driver>(`${environment.apiUrl}/api/Drivers/${driver.id}`, driver).pipe(
+            map((response) => {
+                this._driver.next(response);
+            })
+        );
+    }
+
+    /**
+     * create the driver
+     *
+     * @param driver
+     */
+    create(driver: Driver): Observable<any>
+    {
+        return this._httpClient.post<Driver>(`${environment.apiUrl}/api/Drivers`, driver).pipe(
             map((response) => {
                 this._driver.next(response);
             })
@@ -71,6 +85,6 @@ export class ClientAdminService
      */
      delete(id: string): Observable<any>
      {
-         return this._httpClient.delete(`${environment.apiUrl}/api/Users/${id}`);
+         return this._httpClient.delete(`${environment.apiUrl}/api/Drivers/${id}`);
      }
 }
