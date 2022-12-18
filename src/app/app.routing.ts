@@ -50,7 +50,7 @@ export const appRoutes: Route[] = [
         ]
     },
 
-    // Landing routes
+    // Home routes
     {
         path: '',
         component: LayoutComponent,
@@ -58,7 +58,7 @@ export const appRoutes: Route[] = [
             layout: 'empty'
         },
         children: [
-            {path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.LandingHomeModule)},
+            {path: 'home', loadChildren: () => import('app/modules/home/home.module').then(m => m.HomeModule)},
         ]
     },
 
