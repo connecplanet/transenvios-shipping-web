@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
 import { environment } from 'environments/environment';
+import { resetPassword } from './reset.types';
 
 @Injectable()
-export class AuthService
+export class AuthService 
 {
     private _authenticated: boolean = false;
 
@@ -43,12 +44,12 @@ export class AuthService
 
     /**
      * Forgot password
-     *
+     * Cambiar estado
      * @param email
      */
-    forgotPassword(email: string): Observable<any>
+    forgotPassword(reset:resetPassword ): Observable<any>
     {
-        return this._httpClient.post(`${environment.apiUrl}/api/users/ForgotPassword`, {email});
+        return this._httpClient.post(`${environment.apiUrl}/api/users/ForgotPassword`,reset);
     }
 
     /**
@@ -56,9 +57,9 @@ export class AuthService
      *
      * @param email
      */
-    resetPassword(email: string): Observable<any>
+    resetPassword(credentials: { email: string; password: string }): Observable<any>
     {
-        return this._httpClient.post(`${environment.apiUrl}/api/users/Reset-Password`, {email});
+        return this._httpClient.post(`${environment.apiUrl}/api/users/Reset-Password`, {credentials});
     }
 
     /**

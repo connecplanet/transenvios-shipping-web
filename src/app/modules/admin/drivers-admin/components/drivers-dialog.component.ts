@@ -31,7 +31,7 @@ export class DriversDialogComponent implements OnInit
     {
         this.driver = dialogData['driver'];
         this.cities = dialogData['objCities'];
-        debugger;
+        
         this.isCreate = (this.driver == null)
     }
 

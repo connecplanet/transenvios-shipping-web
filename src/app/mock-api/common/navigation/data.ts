@@ -28,7 +28,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id   : 'admin.route',
                 title: 'Rutas',
                 type : 'basic',
-                icon : 'heroicons_outline:clipboard-check',
+                icon : 'heroicons_outline:map',
                 link : '/admin/route'
             }
             

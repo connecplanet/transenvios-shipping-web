@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, ReplaySubject, tap } from 'rxjs';
 import { environment } from 'environments/environment';
-import { Routes } from './route.types';
+import { Cities, Routes } from './route.types';
 
 @Injectable({
     providedIn: 'root'
@@ -50,10 +50,15 @@ export class RouteAdminService
         return this._httpClient.get<Routes[]>(`${environment.apiUrl}/api/ShipmentRoute`);
     }
 
+    getCities(): Observable<Cities[]>
+    {
+        return this._httpClient.get<Cities[]>(`${environment.apiUrl}/api/Cities`);
+    }
+
     /**
      * Update the user
      *
-     * @param driver
+     * @param routes
      */
     update(routes: Routes): Observable<any>
     {
@@ -67,11 +72,11 @@ export class RouteAdminService
     /**
      * create the driver
      *
-     * @param driver
+     * @param routes
      */
-    create(driver: Routes): Observable<any>
+    create(routes: Routes): Observable<any>
     {
-        return this._httpClient.post<Routes>(`${environment.apiUrl}/api/ShipmentRoute`, driver).pipe(
+        return this._httpClient.post<Routes>(`${environment.apiUrl}/api/ShipmentRoute`, routes).pipe(
             map((response) => {
                 this._route.next(response);
             })
@@ -85,6 +90,7 @@ export class RouteAdminService
      */
      delete(id: string): Observable<any>
      {
+        
          return this._httpClient.delete(`${environment.apiUrl}/api/ShipmentRoute/${id}`);
      }
 }

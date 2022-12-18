@@ -32,7 +32,7 @@ export class RouteDialogComponent implements OnInit
     {
         this.route = dialogData['route'];
         this.cities = dialogData['objCities'];
-        debugger;
+        
         this.isCreate = (this.route == null)
     }
 
@@ -55,6 +55,7 @@ export class RouteDialogComponent implements OnInit
     }
 
     save(): void {
+        
         if(this.composeForm.valid)
             this.matDialogRef.close({event: this.isCreate ?'addRoute' :'saveRoute', data: this.composeForm.getRawValue() });
     }
