@@ -1,0 +1,146 @@
+<div class="flex flex-col max-w-120 md:min-w-100 max-h-screen -m-6">
+
+  <!-- Header -->
+  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-blue-900 text-on-primary">
+    <div class="text-lg font-extrabold modal-center-aligment">Rutas</div>
+    <button mat-icon-button [tabIndex]="-1" (click)="discard()">
+      <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+  </div>
+
+  <!-- Compose form -->
+  <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="composeForm">
+
+    <mat-form-field *ngIf="isCreate">
+      <mat-label>Ciuda Origen </mat-label>
+      <!-- <input matInput [formControlName]="'documentType'" disabled> -->
+      <mat-select [formControlName]="'fromCityCode'" >        
+          <mat-option value="CC">
+            <span class="flex items-center">
+              <span class="ml-2">fromCityCode</span>
+            </span>
+          </mat-option>
+          <mat-option value="PAP">
+            <span class="flex items-center">
+              <span class="ml-2">Pasaporte</span>
+            </span>
+          </mat-option>
+      </mat-select>
+      <button mat-icon-button type="button" matSuffix disabled>
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'" >
+        </mat-icon>
+      </button>
+    </mat-form-field>
+
+
+    <mat-form-field *ngIf="isCreate">
+      <mat-label>Numero Documento</mat-label>
+      <input matInput [formControlName]="'documentId'" disabled>
+      <button mat-icon-button type="button" matSuffix disabled>
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+        </mat-icon>
+      </button>
+    </mat-form-field> 
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput [formControlName]="'firstName'">
+      <button mat-icon-button type="button" matSuffix (click)="clearInput('firstName')">
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'" ></mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Apellido</mat-label>
+      <input matInput [formControlName]="'lastName'">
+      <button mat-icon-button type="button" matSuffix (click)="clearInput('lastName')">
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+        </mat-icon>
+      </button>
+    </mat-form-field>
+     <mat-form-field class="fuse-mat-no-subscript flex-auto">
+      <mat-label>Celular</mat-label>
+      <input matInput [formControlName]="'phone'">
+      <button mat-icon-button type="button" matSuffix (click)="clearInput('phone')">
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+        </mat-icon>
+      </button>
+      <mat-select [formControlName]="'country'" class="mr-1.5" matPrefix>
+        <mat-select-trigger>
+          <span class="flex items-center">
+            <span class="hidden sm:flex w-6 h-4 mr-1 overflow-hidden"
+              [style.background]="'url(\'/assets/images/apps/users/flags.png\') no-repeat 0 0'"
+              [style.backgroundSize]="'24px 3876px'"
+              [style.backgroundPosition]="getCountryByCode().flagImagePos"></span>
+            <span class="sm:mx-0.5 font-medium text-default">
+               {{getCountryByCode().code}}
+            </span>
+          </span>
+        </mat-select-trigger>
+        <ng-container *ngFor="let country of countries">
+          <mat-option [value]="country.iso">
+            <span class="flex items-center">
+              <span class="w-6 h-4 overflow-hidden"
+                [style.background]="'url(\'/assets/images/apps/users/flags.png\') no-repeat 0 0'"
+                [style.backgroundSize]="'24px 3876px'" [style.backgroundPosition]="country.flagImagePos"></span>
+              <span class="ml-2">{{country.name}}</span>
+              <span class="ml-2 font-medium">{{country.code}}</span>
+            </span>
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Correo</mat-label>
+      <input matInput [formControlName]="'email'">
+      <button mat-icon-button type="button" matSuffix (click)="clearInput('email')">
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'"></mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Ciudad</mat-label>
+      <mat-select [formControlName]="'pickUpCityId'" >
+        <ng-container *ngFor="let city of cities">
+          <mat-option [value]="city.code">
+            <span class="flex items-center">
+              <span class="ml-2">{{city.name}}</span>
+            </span>
+          </mat-option>
+        </ng-container>
+      </mat-select>
+      <button mat-icon-button type="button" matSuffix (click)="clearInput('pickUpCityId')">
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+        </mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Direccion</mat-label>
+      <input matInput [formControlName]="'pickUpAddress'">
+      <button mat-icon-button type="button" matSuffix (click)="clearInput('pickUpAddress')">
+        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+        </mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0 ">
+      <div class="flex items-center mt-4 sm:mt-0">
+        <!-- Discard -->
+        <button class="ml-auto sm:ml-0" mat-stroked-button (click)="discard()">
+          Cancelar
+        </button>
+        <button class="text-on-primary sm:order-last bg-blue-900" (click)="save()" mat-flat-button>
+          Guardar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<style>
+  .modal-center-aligment {
+    margin: 0 auto;
+  }
+</style>

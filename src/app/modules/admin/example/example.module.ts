@@ -3,6 +3,7 @@ import { Route, RouterModule } from '@angular/router';
 import { ExampleComponent } from 'app/modules/admin/example/example.component';
 import { ClientsComponent } from 'app/modules/admin/clients-admin/clients.component';
 import { DriversComponent } from 'app/modules/admin/drivers-admin/drivers.component';
+import { RouteComponent } from '../route-admin/route.component';
 
 const exampleRoutes: Route[] = [
     {
@@ -16,6 +17,10 @@ const exampleRoutes: Route[] = [
     {
         path     : 'drivers',
         component: DriversComponent
+    },
+    {
+        path     : 'route',
+        component: RouteComponent
     }
 ];
 

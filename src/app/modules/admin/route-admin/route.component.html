@@ -1,0 +1,61 @@
+<div class="flex flex-col flex-auto min-w-0">
+  <fuse-alert
+    [appearance]="'soft'"
+    [dismissible]="true"
+    [dismissed]="true"
+    [name]="'alertBox1'"
+    [type]="alertConf.type"
+    [appearance]="'outline'">
+    {{alertConf.message}}
+</fuse-alert>
+  <div class="flex-auto p-6 sm:p-10">
+    <div class="overflow-x-auto mx-6">
+      <table class="w-full bg-transparent" mat-table [dataSource]="dataSource" #recentTransactionsTable>
+        <ng-container matColumnDef="fromCityCode">
+          <th mat-header-cell *matHeaderCellDef class="bg-gray-200"> Ciuda Origen </th>
+          <td mat-cell *matCellDef="let element"> {{element.fromCityCode}} </td>
+        </ng-container>
+        <ng-container matColumnDef="toCityCode">
+          <th mat-header-cell *matHeaderCellDef class="bg-gray-200"> # Ciudad Destino </th>
+          <td mat-cell *matCellDef="let element"> {{element.toCityCode }} </td>
+        </ng-container>
+        <ng-container matColumnDef="initialKiloPrice">
+          <th mat-header-cell *matHeaderCellDef class="bg-gray-200"> Precio Kilo Inicial </th>
+          <td mat-cell *matCellDef="let element"> {{element.initialKiloPrice }} </td>
+        </ng-container>
+        <ng-container matColumnDef="additionalKiloPrice">
+          <th mat-header-cell *matHeaderCellDef class="bg-gray-200"> Precio Kilo Adicional </th>
+          <td mat-cell *matCellDef="let element"> {{element.additionalKiloPrice }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="priceCm3">
+          <th mat-header-cell *matHeaderCellDef class="bg-gray-200"> Precio Metro Cubico </th>
+          <td mat-cell *matCellDef="let element"> {{element.priceCm3  }} </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="bg-gray-200"> Acciones </th>
+          <td mat-cell *matCellDef="let user" class="p-2">
+            <button mat-icon-button type="button" matSuffix (click)="editRoute(user)">
+              <mat-icon class="icon-size-5 text-primary-400" [svgIcon]="'heroicons_solid:eye'"></mat-icon>&nbsp;
+            </button>
+            <button mat-icon-button type="button" matSuffix (click)="deleteUser(user)">
+              <mat-icon class="icon-size-5 text-warn-400" [svgIcon]="'heroicons_solid:trash'"></mat-icon>&nbsp;
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+      <button type="button" class="flex items-center text-on-primary sm:order-last justify-end bg-blue-900" mat-stroked-button (click)="addRoute()">
+        Agregar Ruta
+      </button>
+  </div>
+      
+
+</div>
