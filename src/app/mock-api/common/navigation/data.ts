@@ -5,22 +5,50 @@ export const defaultNavigation: FuseNavigationItem[] = [
     {
         id   : 'admin',
         title: 'ADMINISTRACION',
-        subtitle: 'Gestion de tablas maestras',
+        subtitle: 'Gestión de modulos del sistema',
         type : 'group',
         link : '/admin',
         children: [
             {
+                id   : 'admin.solicitudes',
+                title: 'Solicitudes',
+                type : 'basic',
+                icon : 'heroicons_outline:calendar',
+                link : '/admin/shipments'
+            },
+            {
                 id   : 'admin.clients',
                 title: 'Clientes',
                 type : 'basic',
-                icon : 'heroicons_outline:user',
+                icon : 'heroicons_outline:users',
+                link : '/admin/clients'
+            },
+            {
+                id   : 'admin.clients',
+                title: 'Administradores',
+                type : 'basic',
+                icon : 'heroicons_outline:user-circle',
                 link : '/admin/clients'
             },
             {
                 id   : 'admin.drivers',
-                title: 'Conductores',
+                title: 'Transportadores',
                 type : 'basic',
-                icon : 'heroicons_outline:clipboard-check',
+                icon : 'heroicons_outline:truck',
+                link : '/admin/drivers'
+            },
+            {
+                id   : 'admin.drivers',
+                title: 'Rutas',
+                type : 'basic',
+                icon : 'heroicons_outline:map',
+                link : '/admin/drivers'
+            },
+            {
+                id   : 'admin.drivers',
+                title: 'Ciudades',
+                type : 'basic',
+                icon : 'heroicons_outline:location-marker',
                 link : '/admin/drivers'
             }
         ]
