@@ -4,6 +4,7 @@ import { finalize } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
 import { AuthService } from 'app/core/auth/auth.service';
+import { resetPassword } from 'app/core/auth/reset.types';
 
 @Component({
     selector     : 'auth-forgot-password',
@@ -15,6 +16,7 @@ export class AuthForgotPasswordComponent implements OnInit
 {
     @ViewChild('forgotPasswordNgForm') forgotPasswordNgForm: NgForm;
 
+     _credentials:resetPassword;
     alert: { type: FuseAlertType; message: string } = {
         type   : 'success',
         message: ''
@@ -52,7 +54,7 @@ export class AuthForgotPasswordComponent implements OnInit
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Send the reset link
+     * Send the reset link, llamado Link
      */
     sendResetLink(): void
     {
@@ -68,8 +70,15 @@ export class AuthForgotPasswordComponent implements OnInit
         // Hide the alert
         this.showAlert = false;
 
-        // Forgot password
-        this._authService.forgotPassword(this.forgotPasswordForm.get('email').value)
+        debugger;
+        
+        let credentials= new resetPassword();
+        credentials=new resetPassword;
+        credentials.email=this.forgotPasswordForm.get('email').value;
+        credentials.password="1";
+    
+    // Forgot password
+        this._authService.forgotPassword(credentials)
             .pipe(
                 finalize(() => {
 

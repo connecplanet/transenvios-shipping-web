@@ -1,3 +1,4 @@
+
 import { Route } from '@angular/router';
 import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
@@ -75,6 +76,8 @@ export const appRoutes: Route[] = [
             {path: 'admin', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
             {path: 'clients', loadChildren: () => import('app/modules/admin/clients-admin/clients.module').then(m => m.ClientsModule)},
             {path: 'drivers', loadChildren: () => import('app/modules/admin/drivers-admin/drivers.module').then(m => m.DriversModule)},
+            {path: 'Route', loadChildren: () => import('app/modules/admin/route-admin/route.module').then(m => m.RouteModule)},
         ]
     }
 ];
+

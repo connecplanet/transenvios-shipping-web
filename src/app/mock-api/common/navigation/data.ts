@@ -51,6 +51,15 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon : 'heroicons_outline:location-marker',
                 link : '/admin/drivers'
             }
+            ,
+            {
+                id   : 'admin.route',
+                title: 'Rutas',
+                type : 'basic',
+                icon : 'heroicons_outline:map',
+                link : '/admin/route'
+            }
+            
         ]
     }
 ];
@@ -81,3 +90,4 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         link : '/admin'
     }
 ];
+
