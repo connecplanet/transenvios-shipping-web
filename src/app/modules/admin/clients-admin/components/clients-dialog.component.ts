@@ -54,7 +54,7 @@ export class ClientsDialogComponent implements OnInit
     }
 
     save(): void {
-        debugger;
+        
         this.matDialogRef.close({event: 'saveClient', data: this.composeForm.getRawValue() });
     }
 

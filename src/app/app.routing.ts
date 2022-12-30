@@ -1,3 +1,4 @@
+
 import { Route } from '@angular/router';
 import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
@@ -12,7 +13,7 @@ export const appRoutes: Route[] = [
     // Redirect empty path to '/example'
     {path: '', pathMatch : 'full', redirectTo: 'admin'},
 
-    // Redirect signed-in user to the '/example'
+    // Redirect signed-in user to the '/home'
     //
     // After the user signs in, the sign-in page will redirect the user to the 'signed-in-redirect'
     // path. Below is another redirection for that path to redirect the user to the desired
@@ -50,15 +51,16 @@ export const appRoutes: Route[] = [
         ]
     },
 
-    // Landing routes
+    // Home routes
     {
         path: '',
+        canMatch: [AuthGuard],
         component: LayoutComponent,
-        data: {
-            layout: 'empty'
+        resolve: {
+            initialData: InitialDataResolver,
         },
         children: [
-            {path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.LandingHomeModule)},
+            {path: 'home', loadChildren: () => import('app/modules/home/home/home.module').then(m => m.HomeModule)},
         ]
     },
 
@@ -75,6 +77,8 @@ export const appRoutes: Route[] = [
             {path: 'clients', loadChildren: () => import('app/modules/admin/clients-admin/clients.module').then(m => m.ClientsModule)},
             {path: 'users', loadChildren: () => import('app/modules/admin/clients-admin/clients.module').then(m => m.ClientsModule)},
             {path: 'drivers', loadChildren: () => import('app/modules/admin/drivers-admin/drivers.module').then(m => m.DriversModule)},
+            {path: 'Route', loadChildren: () => import('app/modules/admin/route-admin/route.module').then(m => m.RouteModule)},
         ]
     }
 ];
+

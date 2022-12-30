@@ -3,36 +3,37 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { City } from 'app/core/cities/cities.types';
 import { Driver, Country } from 'app/core/drivers/drivers.types';
+import { Routes } from 'app/core/shipmentOrderRoute/route.types';
 import {countries } from 'app/mock-api/apps/users/data';
 import { Subject, takeUntil } from 'rxjs';
 
 
 
 @Component({
-    selector     : 'drivers-dialog',
-    templateUrl  : './drivers-dialog.component.html',
+    selector     : 'route-dialog',
+    templateUrl  : './route-dialog.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class DriversDialogComponent implements OnInit
+export class RouteDialogComponent implements OnInit
 {
     composeForm: UntypedFormGroup;
     isCreate: boolean = false;
-    driver: Driver;
+    route: Routes;
     countries: Country[];
     cities: City[];
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     constructor(
-        public matDialogRef: MatDialogRef<DriversDialogComponent>,
+        public matDialogRef: MatDialogRef<RouteDialogComponent>,
         private _formBuilder: UntypedFormBuilder,
         @Inject(MAT_DIALOG_DATA) public dialogData,
     )
     {
-        this.driver = dialogData['driver'];
+        this.route = dialogData['route'];
         this.cities = dialogData['objCities'];
         
-        this.isCreate = (this.driver == null)
+        this.isCreate = (this.route == null)
     }
 
     ngOnInit(): void
@@ -40,16 +41,12 @@ export class DriversDialogComponent implements OnInit
         this.countries = countries;
 
         this.composeForm = this._formBuilder.group({
-            id     : [this.driver?.id, []],
-            documentType     : [this.driver?.documentType, [Validators.required]],
-            documentId     : [this.driver?.documentId, [Validators.required]],
-            firstName     : [this.driver?.firstName, [Validators.required]],
-            lastName     : [this.driver?.lastName, [Validators.required]],
-            phone     : [this.driver?.phone, [Validators.required]],
-            email     : [this.driver?.email, [Validators.required, Validators.email]],
-            country: ['co', [Validators.required]],
-            pickUpCityId: [this.driver?.pickUpCityId, [Validators.required]],
-            pickUpAddress: [this.driver?.pickUpAddress, [Validators.required]],
+            id     : [this.route?.id, []],
+            fromCityCode     : [this.route?.fromCityCode, [Validators.required]],
+            toCityCode     : [this.route?.toCityCode, [Validators.required]],
+            initialKiloPrice     : [this.route?.initialKiloPrice, [Validators.required]],
+            additionalKiloPrice     : [this.route?.additionalKiloPrice, [Validators.required]],
+            priceCm3     : [this.route?.priceCm3, [Validators.required]],
         });
     }
 
@@ -58,8 +55,9 @@ export class DriversDialogComponent implements OnInit
     }
 
     save(): void {
+        
         if(this.composeForm.valid)
-            this.matDialogRef.close({event: this.isCreate ?'addDriver' :'saveDriver', data: this.composeForm.getRawValue() });
+            this.matDialogRef.close({event: this.isCreate ?'addRoute' :'saveRoute', data: this.composeForm.getRawValue() });
     }
 
     clearInput(inputName: string): void {
