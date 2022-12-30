@@ -1,5 +1,5 @@
 import { ClientAdminService } from '../../../core/clients/clients.service';
-import { Component, ViewEncapsulation, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
@@ -8,6 +8,7 @@ import { Client } from 'app/core/clients/clients.types';
 import { MatPaginator } from '@angular/material/paginator';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { FuseAlertService } from '@fuse/components/alert';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -19,14 +20,17 @@ import { FuseAlertService } from '@fuse/components/alert';
 export class ClientsComponent implements OnInit {
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
     displayedColumns: string[] = ['documentType', 'documentId', 'firstName', 'lastName', 'phone', 'email', 'actions'];
-
+    filterOptions: string;
     @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    
 
     alertConf: {
         type: string,
         title: string,
         message: string
     } = { type: '', title: '', message: '' };
+    activeRoute: any;
 
 
     constructor(
@@ -34,12 +38,25 @@ export class ClientsComponent implements OnInit {
         private _clientAdminService: ClientAdminService,
         private _fuseConfirmationService: FuseConfirmationService,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _fuseAlertService: FuseAlertService
-    ) {
-    }
+        private _fuseAlertService: FuseAlertService,
+        private route: ActivatedRoute
+    ) { }
 
     ngOnInit(): void {
-        this._clientAdminService.get().subscribe((response) => {
+
+        this.activeRoute = this.route.data.subscribe(data => {
+            this.filterOptions = data.filterOptions;
+            this.getAllUsers();
+        });
+
+    }
+
+    ngOnDestroy() {
+        this.activeRoute.unsubscribe();
+      }
+
+    getAllUsers(){
+        this._clientAdminService.get(this.filterOptions).subscribe((response) => {
             this.dataSource.data = response;
         });
     }
@@ -51,7 +68,8 @@ export class ClientsComponent implements OnInit {
     editUser(client: Client): void {
         const dialogRef = this._matDialog.open(ClientsDialogComponent, {
             data: {
-                client
+                client,
+                isClient: (this.filterOptions == 'Clients')
             }
         });
 
@@ -59,7 +77,7 @@ export class ClientsComponent implements OnInit {
             .subscribe((response) => {
                 if (response.event === 'saveClient') {
                     const update = response.data;
-                    this._clientAdminService.update(update).subscribe((response) => {
+                    this._clientAdminService.update(update,this.filterOptions).subscribe((response) => {
                         this.dataSource.data = this.dataSource.data.map((item) => {
                             if (item.id === update.id) {
                                 item = update;
@@ -94,7 +112,7 @@ export class ClientsComponent implements OnInit {
 
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
-                this._clientAdminService.delete(client.id).subscribe(() => {
+                this._clientAdminService.delete(client.id, this.filterOptions).subscribe(() => {
                     this.dataSource.data = this.dataSource.data.filter(item => item.id !== client.id);
                     this.alertConf['type'] = "success";
                     this.alertConf['message'] = "Usuario eliminado correctamente";

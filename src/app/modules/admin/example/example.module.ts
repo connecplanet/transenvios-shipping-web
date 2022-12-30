@@ -11,7 +11,17 @@ const exampleRoutes: Route[] = [
     },
     {
         path     : 'clients',
-        component: ClientsComponent
+        component: ClientsComponent,
+        data: {
+            filterOptions : 'Clients'
+        }
+    },
+    {
+        path     : 'users',
+        component: ClientsComponent,
+        data: {
+            filterOptions : 'Users'
+        }
     },
     {
         path     : 'drivers',

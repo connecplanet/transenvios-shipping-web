@@ -45,9 +45,9 @@ export class ClientAdminService
     /**
      * Get list of users
      */
-    get(): Observable<Client[]>
+    get(path: string): Observable<Client[]>
     {
-        return this._httpClient.get<Client[]>(`${environment.apiUrl}/api/Clients`);
+        return this._httpClient.get<Client[]>(`${environment.apiUrl}/api/${path}`);
     }
 
     /**
@@ -55,9 +55,9 @@ export class ClientAdminService
      *
      * @param client
      */
-    update(client: Client): Observable<any>
+    update(client: Client, path: string): Observable<any>
     {
-        return this._httpClient.put<Client>(`${environment.apiUrl}/api/Clients/${client.id}`, client).pipe(
+        return this._httpClient.put<Client>(`${environment.apiUrl}/api/${path}/${client.id}`, client).pipe(
             map((response) => {
                 this._client.next(response);
             })
@@ -69,8 +69,8 @@ export class ClientAdminService
      *
      * @param id
      */
-     delete(id: string): Observable<any>
+     delete(id: string, path: string): Observable<any>
      {
-         return this._httpClient.delete(`${environment.apiUrl}/api/Clients/${id}`);
+         return this._httpClient.delete(`${environment.apiUrl}/api/${path}/${id}`);
      }
 }

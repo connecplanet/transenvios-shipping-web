@@ -10,6 +10,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         link : '/admin',
         children: [
             {
+                id   : 'admin.users',
+                title: 'Usuarios',
+                type : 'basic',
+                icon : 'heroicons_outline:user',
+                link : '/admin/users'
+            },
+            {
                 id   : 'admin.clients',
                 title: 'Clientes',
                 type : 'basic',
