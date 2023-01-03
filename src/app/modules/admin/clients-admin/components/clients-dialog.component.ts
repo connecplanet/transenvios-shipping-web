@@ -19,6 +19,7 @@ export class ClientsDialogComponent implements OnInit
     countries: Country[];
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    isClient: boolean = false;
 
     constructor(
         public matDialogRef: MatDialogRef<ClientsDialogComponent>,
@@ -27,6 +28,7 @@ export class ClientsDialogComponent implements OnInit
     )
     {
         this.client = dialogData['client'];
+        this.isClient = dialogData['isClient'];
     }
 
     ngOnInit(): void
