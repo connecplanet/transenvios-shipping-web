@@ -10,14 +10,14 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
-          name: "Clean working directory"
-          command: |
-            rm -r *
-      - run:
           name: "Check install"
           command: |
             google-chrome --version
             chromedriver --version
+      - run:
+          name: "Clean working directory"
+          command: |
+            rm *
       - checkout
       - run:
           name: "Show current branch"
