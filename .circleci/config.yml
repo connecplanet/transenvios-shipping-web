@@ -3,12 +3,16 @@ orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
-    working_directory: ~/transenvios-shipping-web-01
+    working_directory: ~/transenvios-shipping-web
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      - run:
+          name: "Clean working directory"
+          command: |
+            rm -r *
       - run:
           name: "Check install"
           command: |
