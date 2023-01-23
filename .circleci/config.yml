@@ -3,7 +3,7 @@ orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
-    working_directory: ~/transenvios-shipping-web-${CIRCLE_BRANCH}
+    working_directory: /transenvios-shipping-web
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
