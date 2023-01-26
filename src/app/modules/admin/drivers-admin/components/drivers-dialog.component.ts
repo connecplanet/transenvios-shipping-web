@@ -31,7 +31,7 @@ export class DriversDialogComponent implements OnInit
     {
         this.driver = dialogData['driver'];
         this.cities = dialogData['objCities'];
-        
+
         this.isCreate = (this.driver == null)
     }
 
@@ -50,6 +50,7 @@ export class DriversDialogComponent implements OnInit
             country: ['co', [Validators.required]],
             pickUpCityId: [this.driver?.pickUpCityId, [Validators.required]],
             pickUpAddress: [this.driver?.pickUpAddress, [Validators.required]],
+            active: [true, [Validators.required]]
         });
     }
 

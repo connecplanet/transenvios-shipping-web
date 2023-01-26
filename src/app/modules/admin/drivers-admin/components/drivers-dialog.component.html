@@ -14,7 +14,7 @@
     <mat-form-field *ngIf="isCreate">
       <mat-label>Tipo Documento</mat-label>
       <!-- <input matInput [formControlName]="'documentType'" disabled> -->
-      <mat-select [formControlName]="'documentType'" >        
+      <mat-select [formControlName]="'documentType'" >
           <mat-option value="CC">
             <span class="flex items-center">
               <span class="ml-2">Cedula de ciudadania</span>
@@ -40,7 +40,7 @@
         <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
         </mat-icon>
       </button>
-    </mat-form-field> 
+    </mat-form-field>
 
     <mat-form-field>
       <mat-label>Nombre</mat-label>
@@ -90,7 +90,7 @@
         </ng-container>
       </mat-select>
     </mat-form-field>
-    
+
     <mat-form-field>
       <mat-label>Correo</mat-label>
       <input matInput [formControlName]="'email'">
@@ -103,7 +103,7 @@
       <mat-label>Ciudad</mat-label>
       <mat-select [formControlName]="'pickUpCityId'" >
         <ng-container *ngFor="let city of cities">
-          <mat-option [value]="city.code">
+          <mat-option [value]="city.id">
             <span class="flex items-center">
               <span class="ml-2">{{city.name}}</span>
             </span>

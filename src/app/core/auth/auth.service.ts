@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
 import { resetPassword } from './reset.types';
 
 @Injectable()
-export class AuthService 
+export class AuthService
 {
     private _authenticated: boolean = false;
 
@@ -74,6 +74,8 @@ export class AuthService
         {
             return throwError('User is already logged in.');
         }
+
+        credentials["role"] = "1";
 
         return this._httpClient.post(`${environment.apiUrl}/api/users/Authenticate`, credentials).pipe(
             switchMap((response: any) => {

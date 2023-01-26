@@ -3,71 +3,40 @@ import { FuseNavigationItem } from '@fuse/components/navigation';
 
 export const defaultNavigation: FuseNavigationItem[] = [
     {
-        id   : 'admin',
-        title: 'ADMINISTRACION',
-        subtitle: 'Gestión de modulos del sistema',
-        type : 'group',
-        link : '/admin',
-        children: [
-            {
-                id   : 'admin.users',
-                title: 'Usuarios',
-                type : 'basic',
-                icon : 'heroicons_outline:user',
-                link : '/admin/users'
-            },
-            {
-                id   : 'admin.solicitudes',
-                title: 'Solicitudes',
-                type : 'basic',
-                icon : 'heroicons_outline:calendar',
-                link : '/admin/shipments'
-            },
-            {
-                id   : 'admin.clients',
-                title: 'Clientes',
-                type : 'basic',
-                icon : 'heroicons_outline:users',
-                link : '/admin/clients'
-            },
-            {
-                id   : 'admin.clients',
-                title: 'Administradores',
-                type : 'basic',
-                icon : 'heroicons_outline:user-circle',
-                link : '/admin/clients'
-            },
-            {
-                id   : 'admin.drivers',
-                title: 'Transportadores',
-                type : 'basic',
-                icon : 'heroicons_outline:truck',
-                link : '/admin/drivers'
-            },
-            {
-                id   : 'admin.drivers',
-                title: 'Rutas',
-                type : 'basic',
-                icon : 'heroicons_outline:map',
-                link : '/admin/drivers'
-            },
-            {
-                id   : 'admin.drivers',
-                title: 'Ciudades',
-                type : 'basic',
-                icon : 'heroicons_outline:location-marker',
-                link : '/admin/drivers'
-            }
-            ,
-            {
-                id   : 'admin.route',
-                title: 'Rutas',
-                type : 'basic',
-                icon : 'heroicons_outline:map',
-                link : '/admin/route'
-            }
-            
-        ]
+        id   : 'apps.shipments',
+        title: 'Solicitudes',
+        subtitle: '',
+        type : 'basic',
+        icon : 'heroicons_outline:calendar',
+        link : '/admin/shipments'
+    },
+    {
+        id   : 'admin.clients',
+        title: 'Clientes',
+        type : 'basic',
+        icon : 'heroicons_outline:users',
+        link : '/admin/clients'
+    },
+    {
+        id   : 'admin.users',
+        title: 'Administradores',
+        type : 'basic',
+        icon : 'heroicons_outline:user-circle',
+        link : '/admin/users'
+    },
+    {
+        id   : 'admin.drivers',
+        title: 'Transportadores',
+        type : 'basic',
+        icon : 'heroicons_outline:truck',
+        link : '/admin/drivers'
+    },
+    {
+        id   : 'admin.route',
+        title: 'Rutas',
+        type : 'basic',
+        icon : 'heroicons_outline:map',
+        link : '/admin/route'
     }
 ];
 export const compactNavigation: FuseNavigationItem[] = [
