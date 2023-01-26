@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DriversComponent } from 'app/modules/admin/drivers-admin/drivers.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator'; 
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,8 +19,6 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { RouteComponent } from './route.component';
 import { RouteDialogComponent } from './components/route-dialog.component';
 
-
-
 @NgModule({
     declarations: [
         RouteComponent,
@@ -35,7 +33,7 @@ import { RouteDialogComponent } from './components/route-dialog.component';
         MatFormFieldModule,
         MatInputModule,
         MatDialogModule,
-        FormsModule, 
+        FormsModule,
         ReactiveFormsModule,
         MatSelectModule,
         MatMenuModule,
