@@ -13,7 +13,7 @@ import { Routes } from 'app/core/shipmentOrderRoute/route.types';
 
 @Component({
     selector: 'shipment-list',
-    templateUrl: './shipments.component.html',
+    templateUrl: './shipment-list.component.html',
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })

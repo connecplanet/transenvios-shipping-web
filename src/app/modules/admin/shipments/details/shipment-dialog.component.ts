@@ -30,7 +30,6 @@ export class ShipmentDialogComponent implements OnInit
     {
         this.route = dialogData['route'];
         this.cities = dialogData['objCities'];
-
         this.isCreate = (this.route == null)
     }
 
