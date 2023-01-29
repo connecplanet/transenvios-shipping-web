@@ -5,7 +5,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
     {
         id   : 'apps.shipments',
         title: 'Solicitudes',
-        subtitle: '',
         type : 'basic',
         icon : 'heroicons_outline:calendar',
         link : '/admin/shipments'

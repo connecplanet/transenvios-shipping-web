@@ -15,13 +15,13 @@ import { MatSelectModule,  MAT_SELECT_SCROLL_STRATEGY_PROVIDER, } from '@angular
 import { FuseFindByKeyPipeModule } from '@fuse/pipes/find-by-key';
 import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY } from '@angular/material/autocomplete';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import { RouteComponent } from './route.component';
-import { RouteDialogComponent } from './components/route-dialog.component';
+import { ShipmentListComponent } from './Shipments.component';
+import { ShipmentDialogComponent } from './details/shipment-dialog.component';
 
 @NgModule({
     declarations: [
-        RouteComponent,
-        RouteDialogComponent
+        ShipmentListComponent,
+        ShipmentDialogComponent
     ],
     imports     : [
         FuseAlertModule,
@@ -47,6 +47,6 @@ import { RouteDialogComponent } from './components/route-dialog.component';
         },
        ],
 })
-export class RouteModule
+export class ShipmentsModule
 {
 }

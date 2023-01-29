@@ -78,6 +78,7 @@ export const appRoutes: Route[] = [
             {path: 'users', loadChildren: () => import('app/modules/admin/clients-admin/clients.module').then(m => m.ClientsModule)},
             {path: 'drivers', loadChildren: () => import('app/modules/admin/drivers-admin/drivers.module').then(m => m.DriversModule)},
             {path: 'route', loadChildren: () => import('app/modules/admin/route-admin/route.module').then(m => m.RouteModule)},
+            {path: 'shipments', loadChildren: () => import('app/modules/admin/shipments/shipments.module').then(m => m.ShipmentsModule)},
         ]
     }
 ];
