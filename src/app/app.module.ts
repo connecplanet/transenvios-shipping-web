@@ -12,6 +12,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { MatSelectModule } from '@angular/material/select';
+import { AgGridModule } from 'ag-grid-angular';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -38,6 +39,9 @@ const routerConfig: ExtraOptions = {
         // Layout module of your application
         LayoutModule,
         MatSelectModule,
+
+        // Other modules
+        AgGridModule
     ],
     bootstrap   : [
         AppComponent

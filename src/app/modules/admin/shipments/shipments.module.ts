@@ -17,6 +17,7 @@ import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY } from '@angular/material/auto
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ShipmentListComponent } from './shipment-list.component';
 import { ShipmentDialogComponent } from './details/shipment-dialog.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { ShipmentDialogComponent } from './details/shipment-dialog.component';
         MatMenuModule,
         FuseFindByKeyPipeModule,
         ScrollingModule,
-        CommonModule
+        CommonModule,
+        AgGridModule
     ],
     providers: [
         {
