@@ -3,8 +3,10 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({
-    selector: 'btn-cell-renderer',
-    template: ` <button (click)="onButtonClicked($event)">Click me!</button> `,
+    selector: 'app-button-renderer',
+    template: `
+    <button (click)="onEditClicked($event)">Edit</button>&nbsp;
+    <button (click)="onDeleteClicked($event)">Delete</button> `,
 })
 export class ButtonCellRenderer implements ICellRendererAngularComp {
     private params: any;
@@ -18,8 +20,11 @@ export class ButtonCellRenderer implements ICellRendererAngularComp {
         this.params = params;
     }
 
-    onButtonClicked(event: any) {
-        console.log(this.params.data);
-        this.params.clicked(this.params.data.id);
+    onEditClicked(event: any) {
+        this.params.editClicked(this.params.data.id);
+    }
+
+    onDeleteClicked(event: any) {
+        this.params.deleteClicked(this.params.data.id);
     }
 }
