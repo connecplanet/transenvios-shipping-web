@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
@@ -13,6 +13,11 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { MatSelectModule } from '@angular/material/select';
 import { AgGridModule } from 'ag-grid-angular';
+import { ButtonCellRenderer } from './shared/renderer/button-cell-renderer.component';
+import { MatIconModule } from '@angular/material/icon';
+import { PaidCellRenderer } from './shared/renderer/paid-cell-renderer.component';
+import { UnPaidCellRenderer } from './shared/renderer/unpaid-cell-renderer.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -20,9 +25,6 @@ const routerConfig: ExtraOptions = {
 };
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
     imports     : [
         BrowserModule,
         BrowserAnimationsModule,
@@ -36,16 +38,22 @@ const routerConfig: ExtraOptions = {
         // Core module of your application
         CoreModule,
 
+        // Other modules
+        AgGridModule,
+
         // Layout module of your application
         LayoutModule,
         MatSelectModule,
-
-        // Other modules
-        AgGridModule
+        MatButtonModule,
+        MatIconModule,
+    ],
+    declarations: [
+        AppComponent, ButtonCellRenderer, PaidCellRenderer, UnPaidCellRenderer
     ],
     bootstrap   : [
         AppComponent
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule
 {

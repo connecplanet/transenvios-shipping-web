@@ -9,12 +9,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { FuseAlertService } from '@fuse/components/alert';
-import { CellClickedEvent, ColDef, GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { CellClickedEvent, ColDef, GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ButtonCellRenderer } from 'app/shared/renderer/button-cell-renderer.component';
+import { ButtonCellRenderer, IButtonCellParams } from 'app/shared/renderer/button-cell-renderer.component';
 import { ShipmentOrderService } from 'app/core/shipments/shipment-order.service';
 import { IShipmentOrder } from 'app/core/shipments/shipment-order.types';
+import { UnPaidCellRenderer } from 'app/shared/renderer/unpaid-cell-renderer.component';
+import { PaidCellRenderer } from 'app/shared/renderer/paid-cell-renderer.component';
 
 @Component({
     selector: 'shipment-list',
@@ -23,43 +25,13 @@ import { IShipmentOrder } from 'app/core/shipments/shipment-order.types';
     animations: fuseAnimations,
 })
 export class ShipmentListComponent implements OnInit {
-    colDefs: ColDef[] = [
-        { field: 'id', headerName: 'ID', maxWidth: 70 },
-        { field: 'applicationDate', headerName: 'Fecha', maxWidth: 110 },
-        { field: 'customerName', headerName: 'Nombre Cliente', maxWidth: 180 },
-        { field: 'phone', headerName: 'Teléfono', maxWidth: 111 },
-        { field: 'fromCity', headerName: 'Origen', maxWidth: 110 },
-        { field: 'toCity', headerName: 'Destino', maxWidth: 110 },
-        { field: 'paymentState', headerName: 'Pago', maxWidth: 100 },
-        { field: 'transporterName', headerName: 'Transportador', maxWidth: 150 },
-        { field: 'shipmentState', headerName: 'Estado Envío', maxWidth: 130 },
-        { field: 'shipmentPrice', headerName: 'Costo Envío', maxWidth: 130 },
-        {
-            field: 'actions',
-            headerName: 'Acciones',
-            cellRenderer: ButtonCellRenderer,
-            cellRendererParams: {
-                editClicked: (itemId: any) => {
-                    alert(`Edit button for ${itemId} was clicked`);
-                },
-                deleteClicked: (itemId: any) => {
-                    alert(`Delete button for ${itemId} was clicked`);
-                },
-            },
-        },
-    ];
-
-    defaultColDef: ColDef = {
-        sortable: true,
-        filter: true,
-        resizable: true
-    };
-
     rowData$!: Observable<IShipmentOrder[]>;
-
     gridOptions: GridOptions = {
+        // Add Atributes
+        columnDefs: this.createColumnDefs(),
+        defaultColDef: this.createDefaultColDef(),
         // Add event handlers
-        onCellClicked: this.onCellClicked,
+        // onCellClicked: this.onCellClicked,
     }
 
     @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
@@ -76,7 +48,8 @@ export class ShipmentListComponent implements OnInit {
         private fuseConfirmationService: FuseConfirmationService,
         private changeDetectorRef: ChangeDetectorRef,
         private fuseAlertService: FuseAlertService
-    ) {}
+    ) {
+    }
 
     ngOnInit(): void {
     }
@@ -86,12 +59,74 @@ export class ShipmentListComponent implements OnInit {
         this.rowData$ = this.apiService.get(date);
     }
 
+    private createColumnDefs()
+    {
+        const colDefs: ColDef[] = [
+            { field: 'id', headerName: 'ID', maxWidth: 70 },
+            { field: 'applicationDate', headerName: 'Fecha', maxWidth: 110 },
+            { field: 'customerName', headerName: 'Nombre Cliente', maxWidth: 180 },
+            { field: 'phone', headerName: 'Teléfono', maxWidth: 111 },
+            { field: 'fromCity', headerName: 'Origen', maxWidth: 110 },
+            { field: 'toCity', headerName: 'Destino', maxWidth: 110 },
+            {
+                field: 'paymentState',
+                headerName: 'Pago',
+                maxWidth: 100,
+                cellRendererSelector: (params: ICellRendererParams) => {
+                    if(params.value === 'Sin Pagar') {
+                        return { component: UnPaidCellRenderer, params: {} };
+                    }
+                    return { component: PaidCellRenderer, params: {} };
+                }
+            },
+            /*{ field: 'transporterName', headerName: 'Transportador', maxWidth: 150 },*/
+            { field: 'shipmentState', headerName: 'Estado Envío', maxWidth: 130 },
+            {
+                field: 'shipmentPrice',
+                headerName: 'Costo Envío',
+                maxWidth: 130,
+                cellStyle: { "text-align": "center" },
+                cellRenderer: (params: ICellRendererParams) => {
+                    return `$ ${params.value}`;
+                }
+            },
+            {
+                field: 'actions',
+                headerName: '',
+                maxWidth: 120,
+                cellRenderer: ButtonCellRenderer,
+                cellRendererParams: {
+                    onDelete: this.onDeleteClicked.bind(this),
+                    onEdit: this.onEditClicked.bind(this),
+                } as IButtonCellParams,
+            }
+        ];
+        return colDefs;
+    }
+
+    private createDefaultColDef(){
+        const defaultColDef: ColDef = {
+            sortable: true,
+            filter: true,
+            resizable: true
+        };
+        return defaultColDef;
+    }
+
     onCellClicked(event: CellClickedEvent){
         console.log(event);
     }
 
     clearSelection() {
         this.agGrid.api.deselectAll();
+    }
+
+    onEditClicked(params: any) {
+        alert('onEditClicked for ' + params.rowData.id);
+    }
+
+    onDeleteClicked(params: any) {
+        alert('onDeleteClicked for ' + params.rowData.id);
     }
 
     /*

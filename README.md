@@ -36,6 +36,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ### Angular AG-Grid Community
 
 - [Example 1](https://youtu.be/_cRDVM6NlPk)
+- [Material icons](https://fonts.google.com/icons)
 
 ```sh
 $ ng new my-app --style scss --routing false
