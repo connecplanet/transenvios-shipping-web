@@ -44,7 +44,7 @@ export class DriversComponent implements OnInit {
 
     ngOnInit(): void {
         this.getAllDrivers();
-        
+
         this._citiesService.get().subscribe((response) => {
             this.cities = response;
         })
@@ -84,10 +84,9 @@ export class DriversComponent implements OnInit {
                         this.alertConf['type'] = "success";
                         this.alertConf['message'] = "Conductor modificado correctamente";
                         this._fuseAlertService.show('alertBox1')
-
                         setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
 
-                    });     
+                    });
                 }
             });
     }
@@ -106,22 +105,19 @@ export class DriversComponent implements OnInit {
                     let objAdd = response.data;
                     this._driverAdminService.create(objAdd).subscribe((response) => {
                         this.getAllDrivers();
-
                         this.alertConf['type'] = "success";
                         this.alertConf['message'] = "Conductor creado correctamente";
                         this._fuseAlertService.show('alertBox1')
-
                         setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
-
-                    });     
+                    });
                 }
             });
     }
 
-    deleteUser(client: Driver): void {
+    deleteUser(driver: Driver): void {
         const confirmation = this._fuseConfirmationService.open({
             title: 'Eliminar Conductor',
-            message: 'Estas seguro de eliminar el conductor, esta accion no podra ser revertida una vez completada',
+            message: `¿Realmente desea eliminar el conductor ${driver.email}? Esta acción no podra ser revertida una vez completada.`,
             actions: {
                 confirm: {
                     label: 'Eliminar'
@@ -134,8 +130,8 @@ export class DriversComponent implements OnInit {
 
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
-                this._driverAdminService.delete(client.id).subscribe(() => {
-                    this.dataSource.data = this.dataSource.data.filter(item => item.id !== client.id);
+                this._driverAdminService.delete(driver.id).subscribe(() => {
+                    this.dataSource.data = this.dataSource.data.filter(item => item.id !== driver.id);
                     this.alertConf['type'] = "success";
                     this.alertConf['message'] = "Conductor eliminado correctamente";
                     this._fuseAlertService.show('alertBox1')
