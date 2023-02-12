@@ -20,7 +20,7 @@ import { Routes } from 'app/core/shipmentOrderRoute/route.types';
 })
 export class RouteComponent implements OnInit {
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
-    
+
     dataSourceCity: MatTableDataSource<any> = new MatTableDataSource();
     displayedColumns: string[] = ['fromCityCode', 'toCityCode', 'initialKiloPrice', 'additionalKiloPrice', 'priceCm3', 'actions'];
     cities: City[];
@@ -46,7 +46,7 @@ export class RouteComponent implements OnInit {
 
     ngOnInit(): void {
         this.getAllRoutes();
-        
+
         this._citiesService.get().subscribe((response) => {
             this.cities = response;
         })
@@ -54,28 +54,28 @@ export class RouteComponent implements OnInit {
 
     getAllRoutes(){
         this._routeAdminService.get().subscribe((response) => {
-            
+
             this.dataSource.data = response;
 
             this.dataSource.data.forEach(element => {
-             
+
                 let city=   this.cities.filter(from => from.code ==element.fromCityCode);
-             
+
              if (city && city.length>0){
-                    element.fromCityCodeName=city[0].name;    
+                    element.fromCityCodeName=city[0].name;
                     }
 
                     city=   this.cities.filter(from => from.code ==element.toCityCode);
             if (city && city.length>0){
-                    element.toCityCodeName =city[0].name;    
+                    element.toCityCodeName =city[0].name;
                     }
             });
         });
     }
-    
+
     getAllCities(){
         this._routeAdminService.getCities().subscribe((response) => {
-            
+
             this.dataSourceCity.data = response;
         });
     }
@@ -84,7 +84,7 @@ export class RouteComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
     }
 
-    
+
     clearInput(inputName: string): void {
         eval(`this.composeForm.patchValue({${inputName}: ''})`);
     }
@@ -116,7 +116,7 @@ export class RouteComponent implements OnInit {
 
                         setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
 
-                    });     
+                    });
                 }
             });
     }
@@ -142,7 +142,7 @@ export class RouteComponent implements OnInit {
 
                         setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
 
-                    });     
+                    });
                 }
             });
     }
@@ -150,7 +150,7 @@ export class RouteComponent implements OnInit {
     deleteRoute(route: Routes): void {
         const confirmation = this._fuseConfirmationService.open({
             title: 'Eliminar ruta',
-            message: 'Estas seguro de eliminar la ruta, esta accion no podra ser revertida una vez completada',
+            message: `¿Realmente desea eliminar la ruta ${route.fromCityCodeName} - ${route.toCityCodeName}? Esta acción no podra ser revertida una vez completada.`,
             actions: {
                 confirm: {
                     label: 'Eliminar'

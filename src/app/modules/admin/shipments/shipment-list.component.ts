@@ -54,6 +54,10 @@ export class ShipmentListComponent implements OnInit {
     }
 
     onGridReady(params: GridReadyEvent) {
+        this.fetchData();
+    }
+
+    private fetchData() {
         this.rowData$ = this.apiService.get(this.filterDays);
     }
 
@@ -124,84 +128,33 @@ export class ShipmentListComponent implements OnInit {
     }
 
     onDeleteClicked(params: any) {
-        alert('onDeleteClicked for ' + params.rowData.id);
-    }
-
-    onFilterChange(label: string, days: number){
-        this.filterLabel = label;
-        this.filterDays = days;
-        this.rowData$ = this.apiService.get(this.filterDays);
-    }
-
-    /*
-    editRoute(route: Routes): void {
-        const objCities = this.cities;
-        const dialogRef = this.matDialog.open(ShipmentDialogComponent, {
-            data: {
-                route,
-                objCities,
-            },
-        });
-
-        dialogRef.afterClosed().subscribe((response) => {
-            if (response.event === 'saveRoute') {
-                const update = response.data;
-                this.apiService.update(update).subscribe((response) => {
-                    this.dataSource.data = this.dataSource.data.map((item) => {
-                        if (item.id === update.id) {
-                            item = update;
-                        }
-                        return item;
-                    });
-
-                    this.alertConf['type'] = 'success';
-                    this.alertConf['message'] = 'Ruta modificada correctamente';
-                    this.fuseAlertService.show('alertBox1');
-
-                    setTimeout(
-                        () => this.fuseAlertService.dismiss('alertBox1'),
-                        3000
-                    );
-                });
-            }
-        });
-    }
-    */
-
-    /*
-    deleteRoute(route: Routes): void {
         const confirmation = this.fuseConfirmationService.open({
-            title: 'Eliminar ruta',
-            message:
-                'Estas seguro de eliminar la ruta, esta accion no podra ser revertida una vez completada',
-            actions: {
-                confirm: {
-                    label: 'Eliminar',
-                },
-                cancel: {
-                    label: 'Cancelar',
-                },
-            },
+            title: 'Eliminar Solicitud',
+            message: `¿Reliminar la solicitud ${params.rowData.id}? Esta acción no podra ser revertida una vez completada.`,
+            actions: { confirm: { label: 'Eliminar' }, cancel: { label: 'Cancelar' } }
         });
 
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
-                this.apiService.delete(route.id).subscribe(() => {
-                    this.dataSource.data = this.dataSource.data.filter(
-                        (item) => item.id !== route.id
-                    );
-                    this.alertConf['type'] = 'success';
-                    this.alertConf['message'] = 'Ruta eliminada correctamente';
-                    this.fuseAlertService.show('alertBox1');
-
-                    setTimeout(
-                        () => this.fuseAlertService.dismiss('alertBox1'),
-                        3000
-                    );
+                this.apiService.delete(params.rowData.id).subscribe(() => {
+                    this.fetchData();
+                    this.showAlertPanel('success', 'Solicitud eliminada correctamente!');
                 });
                 this.changeDetectorRef.markForCheck();
             }
         });
     }
-    */
+
+    onFilterChange(label: string, days: number){
+        this.filterLabel = label;
+        this.filterDays = days;
+        this.fetchData();
+    }
+
+    showAlertPanel(type: string, message: string): void {
+        this.alertConf['type'] = type;
+        this.alertConf['message'] = message;
+        this.fuseAlertService.show('alertPanel');
+        setTimeout(() => this.fuseAlertService.dismiss('alertPanel'), 3000);
+    }
 }
