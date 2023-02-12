@@ -25,13 +25,12 @@ import { PaidCellRenderer } from 'app/shared/renderer/paid-cell-renderer.compone
     animations: fuseAnimations,
 })
 export class ShipmentListComponent implements OnInit {
+    filterLabel: string = '30 días';
+    filterDays: number = 30;
     rowData$!: Observable<IShipmentOrder[]>;
     gridOptions: GridOptions = {
-        // Add Atributes
         columnDefs: this.createColumnDefs(),
         defaultColDef: this.createDefaultColDef(),
-        // Add event handlers
-        // onCellClicked: this.onCellClicked,
     }
 
     @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
@@ -55,8 +54,7 @@ export class ShipmentListComponent implements OnInit {
     }
 
     onGridReady(params: GridReadyEvent) {
-        const date = new Date();
-        this.rowData$ = this.apiService.get(date);
+        this.rowData$ = this.apiService.get(this.filterDays);
     }
 
     private createColumnDefs()
@@ -79,7 +77,7 @@ export class ShipmentListComponent implements OnInit {
                     return { component: PaidCellRenderer, params: {} };
                 }
             },
-            /*{ field: 'transporterName', headerName: 'Transportador', maxWidth: 150 },*/
+            { field: 'transporterName', headerName: 'Transportador', maxWidth: 150 },
             { field: 'shipmentState', headerName: 'Estado Envío', maxWidth: 130 },
             {
                 field: 'shipmentPrice',
@@ -92,7 +90,7 @@ export class ShipmentListComponent implements OnInit {
             },
             {
                 field: 'actions',
-                headerName: '',
+                headerName: 'Acciones',
                 maxWidth: 120,
                 cellRenderer: ButtonCellRenderer,
                 cellRendererParams: {
@@ -127,6 +125,12 @@ export class ShipmentListComponent implements OnInit {
 
     onDeleteClicked(params: any) {
         alert('onDeleteClicked for ' + params.rowData.id);
+    }
+
+    onFilterChange(label: string, days: number){
+        this.filterLabel = label;
+        this.filterDays = days;
+        this.rowData$ = this.apiService.get(this.filterDays);
     }
 
     /*

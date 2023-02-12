@@ -26,18 +26,10 @@ export class ShipmentOrderService
         return this.subject.asObservable();
     }
 
-    get(date: Date): Observable<IShipmentOrder[]>
+    get(fetchLastDays: number): Observable<IShipmentOrder[]>
     {
-        if(!date){
-            date = new Date();
-        }
-
-        const month = this.padTo2Digits(date.getMonth() + 1);
-        const day = this.padTo2Digits(date.getDate());
-        const fetchDate = `${date.getFullYear()}${month}${day}`;
-
         return this._httpClient.get<IShipmentOrder[]>(
-            `${this.baseUrl}/api/shipments/${fetchDate}/orders`);
+            `${this.baseUrl}/api/shipments/${fetchLastDays}/orders`);
     }
 
     update(data: IShipmentOrder): Observable<any>
