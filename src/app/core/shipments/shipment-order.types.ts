@@ -1,4 +1,4 @@
-export interface IShipmentOrder {
+export interface IShipmentListItem {
     id: number;
     applicationDate: string;
     customerName: string;
@@ -11,4 +11,61 @@ export interface IShipmentOrder {
     transporterName?: string;
     transporterId?: string;
     employeeId?: string;
+}
+
+export interface IShipmentOrder {
+    orderId: number;
+    applicationDate: string;
+    paymentState: number;
+    shipmentState: number;
+    transporterId: any;
+    initialPrice: string;
+    taxes: string;
+    totalPrice: string;
+    customer: IShipmentCustomer;
+    sender: IShipmentSender;
+    recipient: IShipmentRecipient;
+    packages: IShipmentPackage[];
+}
+
+export interface IShipmentCustomer {
+    documentType: string;
+    documentId: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+}
+
+export interface IShipmentSender {
+    cityName: string;
+    address: string;
+    documentType: string;
+    documentId: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+}
+
+export interface IShipmentRecipient {
+    cityName: string;
+    address: string;
+    documentType: string;
+    documentId: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+}
+
+export interface IShipmentPackage {
+    id: string;
+    height: string;
+    length: string;
+    width: string;
+    weight: string;
+    quantity: number;
+    isFragile: boolean;
+    isUrgent: boolean;
 }

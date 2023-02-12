@@ -93,7 +93,7 @@ export class ClientsComponent implements OnInit {
     deleteUser(client: Client): void {
         const confirmation = this._fuseConfirmationService.open({
             title: 'Eliminar Usuario',
-            message: `¿Realmente desea eliminar el usuario ${client.email}? Esta acción no podra ser revertida una vez completada.`,
+            message: `¿Realmente desea eliminar el usuario ${client.email}? Esta acción no podrá ser revertida una vez completada.`,
             actions: {
                 confirm: {
                     label: 'Eliminar'

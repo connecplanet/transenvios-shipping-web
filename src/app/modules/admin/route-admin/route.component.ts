@@ -150,7 +150,7 @@ export class RouteComponent implements OnInit {
     deleteRoute(route: Routes): void {
         const confirmation = this._fuseConfirmationService.open({
             title: 'Eliminar ruta',
-            message: `¿Realmente desea eliminar la ruta ${route.fromCityCodeName} - ${route.toCityCodeName}? Esta acción no podra ser revertida una vez completada.`,
+            message: `¿Realmente desea eliminar la ruta ${route.fromCityCodeName} - ${route.toCityCodeName}? Esta acción no podrá ser revertida una vez completada.`,
             actions: {
                 confirm: {
                     label: 'Eliminar'

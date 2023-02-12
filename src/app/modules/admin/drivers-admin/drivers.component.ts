@@ -117,7 +117,7 @@ export class DriversComponent implements OnInit {
     deleteUser(driver: Driver): void {
         const confirmation = this._fuseConfirmationService.open({
             title: 'Eliminar Conductor',
-            message: `¿Realmente desea eliminar el conductor ${driver.email}? Esta acción no podra ser revertida una vez completada.`,
+            message: `¿Realmente desea eliminar el conductor ${driver.email}? Esta acción no podrá ser revertida una vez completada.`,
             actions: {
                 confirm: {
                     label: 'Eliminar'

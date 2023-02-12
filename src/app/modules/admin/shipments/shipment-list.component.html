@@ -18,8 +18,12 @@
         <mat-menu #filterOptions="matMenu">
             <button mat-menu-item (click)="onFilterChange('30 días', 30)">30 días</button>
             <button mat-menu-item (click)="onFilterChange('3 meses', 90)">3 meses</button>
+            <button mat-menu-item (click)="onFilterChange('6 meses', 180)">6 meses</button>
             <button mat-menu-item (click)="onFilterChange('9 meses', 270)">9 meses</button>
             <button mat-menu-item (click)="onFilterChange('12 meses', 365)">12 meses</button>
+            <button mat-menu-item (click)="onFilterChange('15 meses', 450)">15 meses</button>
+            <button mat-menu-item (click)="onFilterChange('18 meses', 540)">18 meses</button>
+            <button mat-menu-item (click)="onFilterChange('24 meses', 720)">24 meses</button>
         </mat-menu>
         <ag-grid-angular
             class="ag-theme-alpine"
