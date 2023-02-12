@@ -19,6 +19,7 @@ export class ShipmentDialogComponent implements OnInit
     route: Routes;
     countries: Country[];
     cities: City[];
+    shipmentId: number;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -28,9 +29,7 @@ export class ShipmentDialogComponent implements OnInit
         @Inject(MAT_DIALOG_DATA) public dialogData,
     )
     {
-        this.route = dialogData['route'];
-        this.cities = dialogData['objCities'];
-        this.isCreate = (this.route == null)
+        this.shipmentId = dialogData['id'];
     }
 
     ngOnInit(): void
