@@ -17,6 +17,7 @@ import { ShipmentOrderService } from 'app/core/shipments/shipment-order.service'
 import { IShipmentOrder } from 'app/core/shipments/shipment-order.types';
 import { UnPaidCellRenderer } from 'app/shared/renderer/unpaid-cell-renderer.component';
 import { PaidCellRenderer } from 'app/shared/renderer/paid-cell-renderer.component';
+import { ShipmentDialogComponent } from './details/shipment-dialog.component';
 
 @Component({
     selector: 'shipment-list',
@@ -124,7 +125,19 @@ export class ShipmentListComponent implements OnInit {
     }
 
     onEditClicked(params: any) {
-        alert('onEditClicked for ' + params.rowData.id);
+        const dialogRef = this.matDialog.open(ShipmentDialogComponent, {
+            data: { id: params.rowData.id } });
+
+        dialogRef.afterClosed()
+            .subscribe((response) => {
+                if (response.event === 'save') {
+                    const update = response.data;
+                    this.apiService.update(update).subscribe((response) => {
+                        this.fetchData();
+                        this.showAlertPanel('success', 'Solicitud modificada correctamente!');
+                    });
+                }
+            });
     }
 
     onDeleteClicked(params: any) {
