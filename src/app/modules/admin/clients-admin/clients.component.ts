@@ -10,7 +10,6 @@ import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { FuseAlertService } from '@fuse/components/alert';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
     selector: 'clients',
     templateUrl: './clients.component.html',
@@ -23,15 +22,12 @@ export class ClientsComponent implements OnInit {
     filterOptions: string;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    
-
     alertConf: {
         type: string,
         title: string,
         message: string
     } = { type: '', title: '', message: '' };
     activeRoute: any;
-
 
     constructor(
         private _matDialog: MatDialog,
@@ -43,12 +39,10 @@ export class ClientsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-
         this.activeRoute = this.route.data.subscribe(data => {
             this.filterOptions = data.filterOptions;
             this.getAllUsers();
         });
-
     }
 
     ngOnDestroy() {
@@ -91,7 +85,7 @@ export class ClientsComponent implements OnInit {
 
                         setTimeout(() => this._fuseAlertService.dismiss('alertBox1'), 3000);
 
-                    });     
+                    });
                 }
             });
     }
@@ -123,6 +117,5 @@ export class ClientsComponent implements OnInit {
                 this._changeDetectorRef.markForCheck();
             }
         });
-
     }
 }

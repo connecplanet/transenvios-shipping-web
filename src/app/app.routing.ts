@@ -73,11 +73,12 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children   : [
-            {path: 'admin', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+            {path: 'admin', loadChildren: () => import('app/modules/admin/settings/settings.module').then(m => m.SettingsModule)},
             {path: 'clients', loadChildren: () => import('app/modules/admin/clients-admin/clients.module').then(m => m.ClientsModule)},
             {path: 'users', loadChildren: () => import('app/modules/admin/clients-admin/clients.module').then(m => m.ClientsModule)},
             {path: 'drivers', loadChildren: () => import('app/modules/admin/drivers-admin/drivers.module').then(m => m.DriversModule)},
             {path: 'route', loadChildren: () => import('app/modules/admin/route-admin/route.module').then(m => m.RouteModule)},
+            {path: 'shipments', loadChildren: () => import('app/modules/admin/shipments/shipments.module').then(m => m.ShipmentsModule)},
         ]
     }
 ];
