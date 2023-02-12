@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, ReplaySubject, tap } from 'rxjs';
-import { Driver } from 'app/core/drivers/drivers.types';
+import { Driver, IDriverCatalog } from 'app/core/drivers/drivers.types';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -48,6 +48,11 @@ export class DriverAdminService
     get(): Observable<Driver[]>
     {
         return this._httpClient.get<Driver[]>(`${environment.apiUrl}/api/Drivers`);
+    }
+
+    getCatalog(): Observable<IDriverCatalog[]>
+    {
+        return this._httpClient.get<IDriverCatalog[]>(`${environment.apiUrl}/api/Drivers/Catalog`);
     }
 
     /**

@@ -21,3 +21,8 @@ export interface Country
     flagImagePos: string;
 }
 
+export interface IDriverCatalog
+{
+    id: string;
+    fullName: string
+}

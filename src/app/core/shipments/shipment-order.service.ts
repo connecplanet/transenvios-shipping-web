@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
 import { map, Observable, ReplaySubject } from "rxjs";
-import { IShipmentOrder } from "./shipment-order.types";
+import { IShipmentListItem } from "./shipment-order.types";
 
 @Injectable({
     providedIn: 'root'
@@ -10,25 +10,25 @@ import { IShipmentOrder } from "./shipment-order.types";
 export class ShipmentOrderService
 {
     private baseUrl = `${environment.apiUrl}`;
-    private subject: ReplaySubject<IShipmentOrder> = new ReplaySubject<IShipmentOrder>(1);
+    private subject: ReplaySubject<IShipmentListItem> = new ReplaySubject<IShipmentListItem>(1);
 
     constructor(private _httpClient: HttpClient)
     {
     }
 
-    set model(value: IShipmentOrder)
+    set model(value: IShipmentListItem)
     {
         this.subject.next(value);
     }
 
-    get model$(): Observable<IShipmentOrder>
+    get model$(): Observable<IShipmentListItem>
     {
         return this.subject.asObservable();
     }
 
-    get(fetchLastDays: number): Observable<IShipmentOrder[]>
+    get(fetchLastDays: number): Observable<IShipmentListItem[]>
     {
-        return this._httpClient.get<IShipmentOrder[]>(
+        return this._httpClient.get<IShipmentListItem[]>(
             `${this.baseUrl}/api/shipments/${fetchLastDays}/orders`);
     }
 
@@ -40,9 +40,9 @@ export class ShipmentOrderService
     }
     */
 
-    update(data: IShipmentOrder): Observable<any>
+    update(data: IShipmentListItem): Observable<any>
     {
-        return this._httpClient.put<IShipmentOrder>(
+        return this._httpClient.put<IShipmentListItem>(
             `${this.baseUrl}/api/Shipments`, data).pipe(
             map((response) => {
                 // this.subject.next(response);

@@ -14,10 +14,12 @@ import { Observable } from 'rxjs';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ButtonCellRenderer, IButtonCellParams } from 'app/shared/renderer/button-cell-renderer.component';
 import { ShipmentOrderService } from 'app/core/shipments/shipment-order.service';
-import { IShipmentOrder } from 'app/core/shipments/shipment-order.types';
+import { IShipmentListItem } from 'app/core/shipments/shipment-order.types';
 import { UnPaidCellRenderer } from 'app/shared/renderer/unpaid-cell-renderer.component';
 import { PaidCellRenderer } from 'app/shared/renderer/paid-cell-renderer.component';
 import { ShipmentDialogComponent } from './details/shipment-dialog.component';
+import { DriverAdminService } from 'app/core/drivers/drivers.service';
+import { IDriverCatalog } from 'app/core/drivers/drivers.types';
 
 @Component({
     selector: 'shipment-list',
@@ -26,9 +28,10 @@ import { ShipmentDialogComponent } from './details/shipment-dialog.component';
     animations: fuseAnimations,
 })
 export class ShipmentListComponent implements OnInit {
-    filterLabel: string = '30 días';
-    filterDays: number = 30;
-    rowData$!: Observable<IShipmentOrder[]>;
+    filterLabel: string;
+    filterDays: number;
+    rowData$!: Observable<IShipmentListItem[]>;
+    drivers: IDriverCatalog[];
     gridOptions: GridOptions = {
         columnDefs: this.createColumnDefs(),
         defaultColDef: this.createDefaultColDef(),
@@ -43,23 +46,30 @@ export class ShipmentListComponent implements OnInit {
     } = { type: '', title: '', message: '' };
 
     constructor(
-        private apiService: ShipmentOrderService,
+        private shipmentService: ShipmentOrderService,
         private matDialog: MatDialog,
         private fuseConfirmationService: FuseConfirmationService,
         private changeDetectorRef: ChangeDetectorRef,
-        private fuseAlertService: FuseAlertService
+        private fuseAlertService: FuseAlertService,
+        private driverService: DriverAdminService
     ) {
     }
 
     ngOnInit(): void {
+        if (localStorage.getItem('filterDays')){
+            this.filterLabel = localStorage.getItem('filterLabel');
+            this.filterDays = +localStorage.getItem('filterDays');
+        }
+        else {
+            this.updateFilterDays('30 días', 30);
+        }
+        this.driverService.getCatalog().subscribe((response) => {
+            this.drivers = response;
+        });
     }
 
     onGridReady(params: GridReadyEvent) {
         this.fetchData();
-    }
-
-    private fetchData() {
-        this.rowData$ = this.apiService.get(this.filterDays);
     }
 
     private createColumnDefs()
@@ -116,6 +126,13 @@ export class ShipmentListComponent implements OnInit {
         return defaultColDef;
     }
 
+    private updateFilterDays(filterLabel: string, filterDays: number) {
+        this.filterLabel = filterLabel;
+        this.filterDays = filterDays;
+        localStorage.setItem('filterLabel', `${this.filterLabel}`);
+        localStorage.setItem('filterDays', `${this.filterDays}`);
+    }
+
     onCellClicked(event: CellClickedEvent){
         console.log(event);
     }
@@ -124,15 +141,29 @@ export class ShipmentListComponent implements OnInit {
         this.agGrid.api.deselectAll();
     }
 
+    private fetchData() {
+        if (!localStorage.getItem('filterDays')){
+            this.filterLabel = '30 días';
+            this.filterDays = 30;
+            localStorage.setItem('filterLabel', `${this.filterLabel}`);
+            localStorage.setItem('filterDays', `${this.filterDays}`);
+        }
+        this.rowData$ = this.shipmentService.get(this.filterDays);
+    }
+
     onEditClicked(params: any) {
         const dialogRef = this.matDialog.open(ShipmentDialogComponent, {
-            data: { id: params.rowData.id } });
+            data: {
+                id: params.rowData.id,
+                drivers: this.drivers
+            }
+        });
 
         dialogRef.afterClosed()
             .subscribe((response) => {
                 if (response.event === 'save') {
                     const update = response.data;
-                    this.apiService.update(update).subscribe((response) => {
+                    this.shipmentService.update(update).subscribe((response) => {
                         this.fetchData();
                         this.showAlertPanel('success', 'Solicitud modificada correctamente!');
                     });
@@ -143,13 +174,13 @@ export class ShipmentListComponent implements OnInit {
     onDeleteClicked(params: any) {
         const confirmation = this.fuseConfirmationService.open({
             title: 'Eliminar Solicitud',
-            message: `¿Reliminar la solicitud ${params.rowData.id}? Esta acción no podra ser revertida una vez completada.`,
+            message: `¿Realmente desea eliminar la solicitud ${params.rowData.id}? Esta acción no podrá ser revertida una vez completada.`,
             actions: { confirm: { label: 'Eliminar' }, cancel: { label: 'Cancelar' } }
         });
 
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
-                this.apiService.delete(params.rowData.id).subscribe(() => {
+                this.shipmentService.delete(params.rowData.id).subscribe(() => {
                     this.fetchData();
                     this.showAlertPanel('success', 'Solicitud eliminada correctamente!');
                 });
@@ -158,9 +189,8 @@ export class ShipmentListComponent implements OnInit {
         });
     }
 
-    onFilterChange(label: string, days: number){
-        this.filterLabel = label;
-        this.filterDays = days;
+    onFilterChange(label: string, days: number) {
+        this.updateFilterDays(label, days);
         this.fetchData();
     }
 

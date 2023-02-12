@@ -2,9 +2,9 @@ import { Component, OnInit, ViewEncapsulation, Inject, ChangeDetectorRef, Inject
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { City } from 'app/core/cities/cities.types';
-import { Driver, Country } from 'app/core/drivers/drivers.types';
+import { Driver, Country, IDriverCatalog } from 'app/core/drivers/drivers.types';
 import { Routes } from 'app/core/shipmentOrderRoute/route.types';
-import { IShipmentOrder } from 'app/core/shipments/shipment-order.types';
+import { IShipmentListItem } from 'app/core/shipments/shipment-order.types';
 import {countries } from 'app/mock-api/apps/users/data';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
@@ -20,27 +20,28 @@ export class ShipmentDialogComponent implements OnInit
     route: Routes;
     countries: Country[];
     cities: City[];
+    drivers: IDriverCatalog[];
 
     shipmentId: number;
-    orderData$!: Observable<IShipmentOrder>;
-
-    private _unsubscribeAll: Subject<any> = new Subject<any>();
+    shipmentData$!: Observable<IShipmentListItem>;
 
     constructor(
         public matDialogRef: MatDialogRef<ShipmentDialogComponent>,
-        private _formBuilder: UntypedFormBuilder,
-        @Inject(MAT_DIALOG_DATA) public dialogData,
+        private formBuilder: UntypedFormBuilder,
+        @Inject(MAT_DIALOG_DATA) public dialogParams,
     )
     {
-        this.shipmentId = dialogData['id'];
+        this.shipmentId = dialogParams['id'];
+        this.drivers = dialogParams['drivers'];
     }
 
     ngOnInit(): void
     {
         this.countries = countries;
 
-        this.composeForm = this._formBuilder.group({
+        this.composeForm = this.formBuilder.group({
             id     : [this.route?.id, []],
+            driverId: [this.route?.fromCityCode, [Validators.required]],
             fromCityCode     : [this.route?.fromCityCode, [Validators.required]],
             toCityCode     : [this.route?.toCityCode, [Validators.required]],
             initialKiloPrice     : [this.route?.initialKiloPrice, [Validators.required]],

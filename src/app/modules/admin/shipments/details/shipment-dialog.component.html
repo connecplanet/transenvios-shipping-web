@@ -12,7 +12,7 @@
   <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="composeForm">
 
     <mat-form-field>
-      <mat-label>Ciudad origen</mat-label>
+      <mat-label>Transportador</mat-label>
       <mat-select [formControlName]="'fromCityCode'" >
         <ng-container *ngFor="let city of cities">
           <mat-option [value]="city.code">
