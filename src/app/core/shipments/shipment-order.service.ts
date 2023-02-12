@@ -32,6 +32,14 @@ export class ShipmentOrderService
             `${this.baseUrl}/api/shipments/${fetchLastDays}/orders`);
     }
 
+    /*
+    get(orderId: number): Observable<IShipmentOrder>
+    {
+        return this._httpClient.get<IShipmentOrder[]>(
+            `${this.baseUrl}/api/shipments/${fetchLastDays}/orders`);
+    }
+    */
+
     update(data: IShipmentOrder): Observable<any>
     {
         return this._httpClient.put<IShipmentOrder>(

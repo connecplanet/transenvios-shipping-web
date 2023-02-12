@@ -4,8 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { City } from 'app/core/cities/cities.types';
 import { Driver, Country } from 'app/core/drivers/drivers.types';
 import { Routes } from 'app/core/shipmentOrderRoute/route.types';
+import { IShipmentOrder } from 'app/core/shipments/shipment-order.types';
 import {countries } from 'app/mock-api/apps/users/data';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector     : 'shipment-dialog',
@@ -19,7 +20,9 @@ export class ShipmentDialogComponent implements OnInit
     route: Routes;
     countries: Country[];
     cities: City[];
+
     shipmentId: number;
+    orderData$!: Observable<IShipmentOrder>;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
