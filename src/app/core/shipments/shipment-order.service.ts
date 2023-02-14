@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
 import { map, Observable, ReplaySubject } from "rxjs";
-import { IShipmentListItem } from "./shipment-order.types";
+import { IShipmentListItem, IShipmentOrder } from "./shipment-order.types";
 
 @Injectable({
     providedIn: 'root'
@@ -32,13 +32,11 @@ export class ShipmentOrderService
             `${this.baseUrl}/api/shipments/${fetchLastDays}/orders`);
     }
 
-    /*
-    get(orderId: number): Observable<IShipmentOrder>
+    getDetails(orderId: number): Observable<IShipmentOrder>
     {
-        return this._httpClient.get<IShipmentOrder[]>(
-            `${this.baseUrl}/api/shipments/${fetchLastDays}/orders`);
+        return this._httpClient.get<IShipmentOrder>(
+            `${this.baseUrl}/api/shipments/${orderId}`);
     }
-    */
 
     update(data: IShipmentListItem): Observable<any>
     {

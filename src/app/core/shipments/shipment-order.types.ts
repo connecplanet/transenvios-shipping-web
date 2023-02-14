@@ -14,11 +14,11 @@ export interface IShipmentListItem {
 }
 
 export interface IShipmentOrder {
-    orderId: number;
+    orderId: string;
     applicationDate: string;
-    paymentState: number;
-    shipmentState: number;
-    transporterId: any;
+    paymentState: string;
+    shipmentState: string;
+    transporterId: string;
     initialPrice: string;
     taxes: string;
     totalPrice: string;
