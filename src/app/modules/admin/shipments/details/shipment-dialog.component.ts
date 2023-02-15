@@ -6,7 +6,7 @@ import { Driver, Country, IDriverCatalog } from 'app/core/drivers/drivers.types'
 import { Routes } from 'app/core/shipmentOrderRoute/route.types';
 import { ShipmentOrderService } from 'app/core/shipments/shipment-order.service';
 import { IShipmentState, IShipmentOrder } from 'app/core/shipments/shipment-order.types';
-import { shipmentStates } from 'app/mock-api/apps/shipments/data';
+import { paymentStates, shipmentStates } from 'app/mock-api/apps/shipments/data';
 import {countries } from 'app/mock-api/apps/users/data';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -25,6 +25,7 @@ export class ShipmentDialogComponent implements OnInit
     isCreate: boolean = false;
     route: Routes;
     shipmentStates: IShipmentState[];
+    paymentStates: IShipmentState[]
     drivers: IDriverCatalog[];
 
     constructor(
@@ -44,6 +45,7 @@ export class ShipmentDialogComponent implements OnInit
     ngOnInit(): void
     {
         this.shipmentStates = shipmentStates;
+        this.paymentStates = paymentStates;
         this.createForm();
 
         this.shipmentService.getDetails(this.shipmentId).subscribe((order) => {
@@ -56,6 +58,7 @@ export class ShipmentDialogComponent implements OnInit
         this.orderForm = this._formBuilder.group({
             id: [this.order?.orderId, []],
             applicationDate: [this.order?.applicationDate, [Validators.required]],
+            paymentState: [this.order?.paymentState, [Validators.required]],
             shipmentState: [this.order?.shipmentState, [Validators.required]],
             transporterId: [this.order?.transporterId, [Validators.required]],
             initialKiloPrice: [this.route?.initialKiloPrice, [Validators.required]],
@@ -67,6 +70,7 @@ export class ShipmentDialogComponent implements OnInit
     private setNewValues(){
         this.orderForm.controls['id'].setValue(this.order?.orderId);
         this.orderForm.controls['applicationDate'].setValue(this.order?.applicationDate);
+        this.orderForm.controls['paymentState'].setValue(this.order?.paymentState);
         this.orderForm.controls['shipmentState'].setValue(this.order?.shipmentState);
         this.orderForm.controls['transporterId'].setValue(this.order?.transporterId);
     }

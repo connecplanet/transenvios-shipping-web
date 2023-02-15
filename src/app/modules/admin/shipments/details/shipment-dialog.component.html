@@ -1,4 +1,4 @@
-<div class="flex flex-col max-w-120 md:min-w-200 max-h-screen -m-6">
+<div class="flex flex-col max-w-220 md:min-w-200 max-h-screen -m-6">
 
   <!-- Header -->
   <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-blue-900 text-on-primary">
@@ -25,6 +25,23 @@
         <mat-label>Fecha de solicitud</mat-label>
         <input matInput [formControlName]="'applicationDate'" readonly="true" disabled="true">
         <button mat-icon-button type="button" matSuffix (click)="clearInput('applicationDate')">
+          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="custom-form-field" style="width: 170px;">
+        <mat-label>Pago</mat-label>
+        <mat-select [formControlName]="'paymentState'" readonly="true" disabled="true">
+          <ng-container *ngFor="let item of paymentStates">
+            <mat-option [value]="item.id">
+              <span class="flex items-center">
+                <span class="ml-2">{{item.name}}</span>
+              </span>
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        <button mat-icon-button type="button" matSuffix (click)="clearInput('paymentState')">
           <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
           </mat-icon>
         </button>

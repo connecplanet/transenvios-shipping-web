@@ -6,3 +6,8 @@ export const shipmentStates = [
     { id: 4, name: 'Entregado' },
     { id: 5, name: 'Cancelado' },
 ];
+
+export const paymentStates = [
+    { id: 0, name: 'Sin Pagar' },
+    { id: 1, name: 'Pagado' },
+];
