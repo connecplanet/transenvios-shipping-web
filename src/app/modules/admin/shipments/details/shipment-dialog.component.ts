@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, Inject, ChangeDetectorRef, Inject
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { City } from 'app/core/cities/cities.types';
-import { Driver, Country } from 'app/core/drivers/drivers.types';
+import { Driver, Country, IDriverCatalog } from 'app/core/drivers/drivers.types';
 import { Routes } from 'app/core/shipmentOrderRoute/route.types';
 import {countries } from 'app/mock-api/apps/users/data';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,7 +10,8 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
     selector     : 'shipment-dialog',
     templateUrl  : './shipment-dialog.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./shipment-dialog.component.scss']
 })
 export class ShipmentDialogComponent implements OnInit
 {
@@ -18,7 +19,7 @@ export class ShipmentDialogComponent implements OnInit
     isCreate: boolean = false;
     route: Routes;
     countries: Country[];
-    cities: City[];
+    drivers: IDriverCatalog[];
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -29,7 +30,7 @@ export class ShipmentDialogComponent implements OnInit
     )
     {
         this.route = dialogData['route'];
-        this.cities = dialogData['objCities'];
+        this.drivers = dialogData['drivers'];
 
         this.isCreate = (this.route == null)
     }
