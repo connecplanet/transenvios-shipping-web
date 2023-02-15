@@ -4,7 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { City } from 'app/core/cities/cities.types';
 import { Driver, Country, IDriverCatalog } from 'app/core/drivers/drivers.types';
 import { Routes } from 'app/core/shipmentOrderRoute/route.types';
-import { ICatalog, IShipmentOrder } from 'app/core/shipments/shipment-order.types';
+import { ShipmentOrderService } from 'app/core/shipments/shipment-order.service';
+import { IShipmentState, IShipmentOrder } from 'app/core/shipments/shipment-order.types';
 import { shipmentStates } from 'app/mock-api/apps/shipments/data';
 import {countries } from 'app/mock-api/apps/users/data';
 import { Subject, takeUntil } from 'rxjs';
@@ -23,13 +24,14 @@ export class ShipmentDialogComponent implements OnInit
     orderForm: UntypedFormGroup;
     isCreate: boolean = false;
     route: Routes;
-    shipmentStates: ICatalog[];
+    shipmentStates: IShipmentState[];
     drivers: IDriverCatalog[];
 
     constructor(
         public matDialogRef: MatDialogRef<ShipmentDialogComponent>,
         private _formBuilder: UntypedFormBuilder,
         @Inject(MAT_DIALOG_DATA) public dialogData,
+        private shipmentService: ShipmentOrderService,
     )
     {
         this.route = dialogData['route'];
@@ -42,15 +44,29 @@ export class ShipmentDialogComponent implements OnInit
     ngOnInit(): void
     {
         this.shipmentStates = shipmentStates;
+        this.createForm();
 
+        this.shipmentService.getDetails(this.shipmentId).subscribe((order) => {
+            this.order = order;
+            setTimeout(() => this.setNewValues(), 1000);
+        });
+    }
+
+    private createForm() {
         this.orderForm = this._formBuilder.group({
             id: [this.order?.orderId, []],
             shipmentState: [this.order?.shipmentState, [Validators.required]],
-            toCityCode: [this.route?.toCityCode, [Validators.required]],
+            transporterId: [this.order?.transporterId, [Validators.required]],
             initialKiloPrice: [this.route?.initialKiloPrice, [Validators.required]],
             additionalKiloPrice: [this.route?.additionalKiloPrice, [Validators.required]],
-            priceCm3     : [this.route?.priceCm3, [Validators.required]],
+            priceCm3: [this.route?.priceCm3, [Validators.required]],
         });
+    }
+
+    private setNewValues(){
+        this.orderForm.controls['shipmentState'].setValue(this.order?.shipmentState);
+        this.orderForm.controls['transporterId'].setValue(this.order?.transporterId);
+        console.log('this.order?.shipmentState', this.order?.shipmentState);
     }
 
     discard(): void {

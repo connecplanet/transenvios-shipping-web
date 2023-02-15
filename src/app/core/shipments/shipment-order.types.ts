@@ -70,7 +70,7 @@ export interface IShipmentPackage {
     isUrgent: boolean;
 }
 
-export interface ICatalog {
-    id: string;
+export interface IShipmentState {
+    id: number;
     name: string;
 }
