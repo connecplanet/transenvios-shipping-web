@@ -69,3 +69,8 @@ export interface IShipmentPackage {
     isFragile: boolean;
     isUrgent: boolean;
 }
+
+export interface ICatalog {
+    id: string;
+    name: string;
+}

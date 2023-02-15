@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { City } from 'app/core/cities/cities.types';
 import { Driver, Country, IDriverCatalog } from 'app/core/drivers/drivers.types';
 import { Routes } from 'app/core/shipmentOrderRoute/route.types';
+import { ICatalog, IShipmentOrder } from 'app/core/shipments/shipment-order.types';
+import { shipmentStates } from 'app/mock-api/apps/shipments/data';
 import {countries } from 'app/mock-api/apps/users/data';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -15,13 +17,14 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ShipmentDialogComponent implements OnInit
 {
-    composeForm: UntypedFormGroup;
+    shipmentId: number;
+    order: IShipmentOrder;
+
+    orderForm: UntypedFormGroup;
     isCreate: boolean = false;
     route: Routes;
-    countries: Country[];
+    shipmentStates: ICatalog[];
     drivers: IDriverCatalog[];
-
-    private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     constructor(
         public matDialogRef: MatDialogRef<ShipmentDialogComponent>,
@@ -30,6 +33,7 @@ export class ShipmentDialogComponent implements OnInit
     )
     {
         this.route = dialogData['route'];
+        this.shipmentId = dialogData['id'];
         this.drivers = dialogData['drivers'];
 
         this.isCreate = (this.route == null)
@@ -37,14 +41,14 @@ export class ShipmentDialogComponent implements OnInit
 
     ngOnInit(): void
     {
-        this.countries = countries;
+        this.shipmentStates = shipmentStates;
 
-        this.composeForm = this._formBuilder.group({
-            id     : [this.route?.id, []],
-            fromCityCode     : [this.route?.fromCityCode, [Validators.required]],
-            toCityCode     : [this.route?.toCityCode, [Validators.required]],
-            initialKiloPrice     : [this.route?.initialKiloPrice, [Validators.required]],
-            additionalKiloPrice     : [this.route?.additionalKiloPrice, [Validators.required]],
+        this.orderForm = this._formBuilder.group({
+            id: [this.order?.orderId, []],
+            shipmentState: [this.order?.shipmentState, [Validators.required]],
+            toCityCode: [this.route?.toCityCode, [Validators.required]],
+            initialKiloPrice: [this.route?.initialKiloPrice, [Validators.required]],
+            additionalKiloPrice: [this.route?.additionalKiloPrice, [Validators.required]],
             priceCm3     : [this.route?.priceCm3, [Validators.required]],
         });
     }
@@ -55,17 +59,18 @@ export class ShipmentDialogComponent implements OnInit
 
     save(): void {
 
-        if(this.composeForm.valid)
-            this.matDialogRef.close({event: this.isCreate ?'addRoute' :'saveRoute', data: this.composeForm.getRawValue() });
+        if(this.orderForm.valid)
+            this.matDialogRef.close({event: this.isCreate ?'addRoute' :'saveRoute', data: this.orderForm.getRawValue() });
     }
 
     clearInput(inputName: string): void {
-        eval(`this.composeForm.patchValue({${inputName}: ''})`);
+        eval(`this.orderForm.patchValue({${inputName}: ''})`);
     }
-
+/*
      getCountryByCode(): Country
      {
-        const iso  = this.composeForm.get('country').value;
-        return this.countries.find(country => country.iso === iso);
+        const iso  = this.orderForm.get('country').value;
+        return this.shipmentStates.find(country => country.iso === iso);
      }
+     */
 }
