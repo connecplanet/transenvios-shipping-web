@@ -1,4 +1,4 @@
-<div class="flex flex-col max-w-120 md:min-w-100 max-h-screen -m-6">
+<div class="flex flex-col max-w-120 md:min-w-200 max-h-screen -m-6">
 
     <!-- Header -->
     <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-blue-900 text-on-primary">
@@ -12,8 +12,26 @@
     <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="orderForm">
 
       <mat-form-field appearance="outline">
+        <mat-label>ID</mat-label>
+        <input matInput [formControlName]="'id'" readonly="true" disabled="true">
+        <button mat-icon-button type="button" matSuffix (click)="clearInput('id')">
+          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de solicitud</mat-label>
+        <input matInput [formControlName]="'applicationDate'" readonly="true" disabled="true">
+        <button mat-icon-button type="button" matSuffix (click)="clearInput('applicationDate')">
+          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
         <mat-label>Estado envío</mat-label>
-        <mat-select [formControlName]="'shipmentState'" >
+        <mat-select [formControlName]="'shipmentState'" readonly="true" disabled="true">
           <ng-container *ngFor="let item of shipmentStates">
             <mat-option [value]="item.id">
               <span class="flex items-center">
@@ -30,7 +48,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Transportador</mat-label>
-        <mat-select [formControlName]="'transporterId'" >
+        <mat-select [formControlName]="'transporterId'" readonly="true" disabled="true">
           <ng-container *ngFor="let item of drivers">
             <mat-option [value]="item.id">
               <span class="flex items-center">

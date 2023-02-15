@@ -55,6 +55,7 @@ export class ShipmentDialogComponent implements OnInit
     private createForm() {
         this.orderForm = this._formBuilder.group({
             id: [this.order?.orderId, []],
+            applicationDate: [this.order?.applicationDate, [Validators.required]],
             shipmentState: [this.order?.shipmentState, [Validators.required]],
             transporterId: [this.order?.transporterId, [Validators.required]],
             initialKiloPrice: [this.route?.initialKiloPrice, [Validators.required]],
@@ -64,9 +65,10 @@ export class ShipmentDialogComponent implements OnInit
     }
 
     private setNewValues(){
+        this.orderForm.controls['id'].setValue(this.order?.orderId);
+        this.orderForm.controls['applicationDate'].setValue(this.order?.applicationDate);
         this.orderForm.controls['shipmentState'].setValue(this.order?.shipmentState);
         this.orderForm.controls['transporterId'].setValue(this.order?.transporterId);
-        console.log('this.order?.shipmentState', this.order?.shipmentState);
     }
 
     discard(): void {
