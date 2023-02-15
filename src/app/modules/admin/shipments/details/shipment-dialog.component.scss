@@ -1,0 +1,24 @@
+.order-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+
+.order-container mat-form-field {
+  width: 220px;
+}
+
+.order-container form {
+  margin-bottom: 20px;
+}
+
+.order-container form > * {
+  margin: 12px 0;
+}
+
+.order-container .mat-radio-button {
+  margin: 0 12px;
+}
+
+.order-form-fields {
+  display: flex;
+  align-items: flex-start;
+}

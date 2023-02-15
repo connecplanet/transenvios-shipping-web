@@ -33,6 +33,7 @@ import { AgGridModule } from 'ag-grid-angular';
         MatFormFieldModule,
         MatInputModule,
         MatDialogModule,
+        MatIconModule,
         FormsModule,
         ReactiveFormsModule,
         MatSelectModule,

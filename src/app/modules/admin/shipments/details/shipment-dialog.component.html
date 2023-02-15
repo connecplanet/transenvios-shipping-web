@@ -1,37 +1,92 @@
-<div class="flex flex-col max-w-120 md:min-w-200 max-h-screen -m-6">
+<div class="flex flex-col max-w-120 md:min-w-100 max-h-screen -m-6">
 
-  <!-- Header -->
-  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-blue-900 text-on-primary">
-    <div class="text-lg font-extrabold modal-center-aligment">Solicitud {{shipmentOrder.orderId}}</div>
-    <button mat-icon-button [tabIndex]="-1" (click)="discard()">
-    <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
-    </button>
-  </div>
-
-  <!-- Form -->
-  <form class="flex flex-col flex-auto p-12 sm:p-12 overflow-y-auto" [formGroup]="orderForm">
-
-    <mat-form-field appearance="outline">
-      <mat-label>ID</mat-label>
-      <input matInput placeholder="" formControlName="orderId" readonly="true" disabled="true">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Fecha de solicitud</mat-label>
-      <input matInput placeholder="" formControlName="applicationDate" readonly="true" disabled="true">
-    </mat-form-field>
-
-    <!-- Actions -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0 ">
-      <div class="flex items-center mt-4 sm:mt-0">
-        <button class="ml-auto sm:ml-0" mat-stroked-button (click)="discard()">Cancelar</button>
-        <button class="text-on-primary sm:order-last bg-blue-900" (click)="save()" mat-flat-button>Guardar</button>
-      </div>
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-blue-900 text-on-primary">
+      <div class="text-lg font-extrabold modal-center-aligment">Rutas</div>
+      <button mat-icon-button [tabIndex]="-1" (click)="discard()">
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
     </div>
-  </form>
-</div>
-<style>
-  .modal-center-aligment {
-    margin: 0 auto;
-  }
-</style>
+
+    <!-- Compose form -->
+    <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="composeForm">
+
+      <mat-form-field>
+        <mat-label>Ciudad origen</mat-label>
+        <mat-select [formControlName]="'fromCityCode'" >
+          <ng-container *ngFor="let city of cities">
+            <mat-option [value]="city.code">
+              <span class="flex items-center">
+                <span class="ml-2">{{city.name}}</span>
+              </span>
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        <button mat-icon-button type="button" matSuffix (click)="clearInput('pickUpCityId')">
+          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Ciudad destino </mat-label>
+        <mat-select [formControlName]="'toCityCode'" >
+          <ng-container *ngFor="let city of cities">
+            <mat-option [value]="city.code">
+              <span class="flex items-center">
+                <span class="ml-2">{{city.name}}</span>
+              </span>
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        <button mat-icon-button type="button" matSuffix (click)="clearInput('pickUpCityId')">
+          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label> Precio kilo inicial</mat-label>
+        <input matInput [formControlName]="'initialKiloPrice'">
+        <button mat-icon-button type="button" matSuffix (click)="clearInput('initialKiloPrice')">
+          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Precio kilo adicional</mat-label>
+        <input matInput [formControlName]="'additionalKiloPrice'">
+        <button mat-icon-button type="button" matSuffix (click)="clearInput('additionalKiloPrice')">
+          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'"></mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label> Precio mc3 </mat-label>
+        <input matInput [formControlName]="'priceCm3'">
+        <button mat-icon-button type="button" matSuffix (click)="clearInput('priceCm3')">
+          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0 ">
+        <div class="flex items-center mt-4 sm:mt-0">
+          <!-- Discard -->
+          <button class="ml-auto sm:ml-0" mat-stroked-button (click)="discard()">
+            Cancelar
+          </button>
+          <button class="text-on-primary sm:order-last bg-blue-900" (click)="save()" mat-flat-button>
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <style>
+    .modal-center-aligment {
+      margin: 0 auto;
+    }
+  </style>
