@@ -1,0 +1,63 @@
+<div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">
+    {{ title }}
+</div>
+
+<div class="order-container">
+    <mat-form-field
+        appearance="outline" floatLabel="always"
+        class="te-form-field te-form-field-disable" style="width: 80px;">
+        <mat-label>Tipo</mat-label>
+        <input matInput [(ngModel)]="person.documentType" />
+    </mat-form-field>
+
+    <mat-form-field
+        appearance="outline" floatLabel="always"
+        class="te-form-field te-form-field-disable" style="width: 120px;">
+        <mat-label>Documento</mat-label>
+        <input matInput [(ngModel)]="person.documentId" />
+    </mat-form-field>
+
+    <mat-form-field
+        appearance="outline" floatLabel="always"
+        class="te-form-field te-form-field-disable" style="width: 150px;">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="person.firstName" />
+    </mat-form-field>
+
+    <mat-form-field
+        appearance="outline" floatLabel="always"
+        class="te-form-field te-form-field-disable" style="width: 150px;">
+        <mat-label>Apellido</mat-label>
+        <input matInput [(ngModel)]="person.lastName" />
+    </mat-form-field>
+</div>
+
+<div class="order-container" style="padding-top: 23px; width: 100%;">
+    <mat-form-field
+        appearance="outline" floatLabel="always"
+        class="te-form-field te-form-field-disable" style="width: 120px;">
+        <mat-label>Ciudad Origen</mat-label>
+        <input matInput [(ngModel)]="person.cityName" />
+    </mat-form-field>
+
+    <mat-form-field
+        appearance="outline" floatLabel="always"
+        class="te-form-field te-form-field-disable" style="width: 120px;">
+        <mat-label>Dirección Origen</mat-label>
+        <input matInput [(ngModel)]="person.address" />
+    </mat-form-field>
+
+    <mat-form-field
+        appearance="outline" floatLabel="always"
+        class="te-form-field te-form-field-disable" style="width: 150px;">
+        <mat-label>Teléfono</mat-label>
+        <input matInput [(ngModel)]="person.phone" />
+    </mat-form-field>
+
+    <mat-form-field
+        appearance="outline" floatLabel="always"
+        class="te-form-field te-form-field-disable" style="width: 150px;">
+        <mat-label>Correo</mat-label>
+        <input matInput [(ngModel)]="person.email" />
+    </mat-form-field>
+</div>

@@ -24,9 +24,10 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ShipmentListComponent } from './shipment-list.component';
 import { ShipmentDialogComponent } from './details/shipment-dialog.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { ShipmentPersonInfoComponent } from './details/shipment-person-info/shipment-person-info.component';
 
 @NgModule({
-    declarations: [ShipmentListComponent, ShipmentDialogComponent],
+    declarations: [ShipmentListComponent, ShipmentDialogComponent, ShipmentPersonInfoComponent],
     imports: [
         FuseAlertModule,
         MatTableModule,

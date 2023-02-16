@@ -22,41 +22,21 @@ export interface IShipmentOrder {
     initialPrice: string;
     taxes: string;
     totalPrice: string;
-    customer: IShipmentCustomer;
-    sender: IShipmentSender;
-    recipient: IShipmentRecipient;
+    customer: IShipmentPerson;
+    sender: IShipmentPerson;
+    recipient: IShipmentPerson;
     packages: IShipmentPackage[];
 }
 
-export interface IShipmentCustomer {
+export interface IShipmentPerson {
     documentType: string;
     documentId: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-}
-
-export interface IShipmentSender {
-    cityName: string;
-    address: string;
-    documentType: string;
-    documentId: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-}
-
-export interface IShipmentRecipient {
-    cityName: string;
-    address: string;
-    documentType: string;
-    documentId: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
+    firstName?: string;
+    lastName?: string;
+    phone?: string;
+    email?: string;
+    cityName?: string;
+    address?: string;
 }
 
 export interface IShipmentPackage {

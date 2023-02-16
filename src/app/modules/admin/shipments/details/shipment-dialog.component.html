@@ -73,16 +73,13 @@
         </button>
       </mat-form-field>
     </div>
-
-    <div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">Solicitante</div>
-
-    <div class="order-container">
-        <mat-form-field appearance="outline" floatLabel="always" class="te-form-field te-form-field-disable" style="width: 80px;">
-            <mat-label>Tipo</mat-label>
-            <input matInput />
-          </mat-form-field>
-    </div>
-
+<!--
+    <app-shipment-person-info
+        [title]="'Solicitante'"
+        [person]="order.customer"
+        *ngIf="order.customer"
+    ></app-shipment-person-info>
+-->
     <div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">Remitente</div>
 
     <div class="order-container">
