@@ -12,25 +12,17 @@
   <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="orderForm">
 
     <div class="order-container">
-      <mat-form-field appearance="outline" class="custom-form-field" style="width: 100px;">
+      <mat-form-field appearance="outline" floatLabel="always" class="te-form-field te-form-field-disable" style="width: 80px;">
         <mat-label>ID</mat-label>
         <input matInput [formControlName]="'id'" readonly="true" disabled="true">
-        <button mat-icon-button type="button" matSuffix (click)="clearInput('id')">
-          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
-          </mat-icon>
-        </button>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="custom-form-field" style="width: 150px;">
-        <mat-label>Fecha de solicitud</mat-label>
+      <mat-form-field appearance="outline" class="te-form-field te-form-field-disable" style="width: 120px;">
+        <mat-label>Fecha solicitud</mat-label>
         <input matInput [formControlName]="'applicationDate'" readonly="true" disabled="true">
-        <button mat-icon-button type="button" matSuffix (click)="clearInput('applicationDate')">
-          <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
-          </mat-icon>
-        </button>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="custom-form-field" style="width: 170px;">
+      <mat-form-field appearance="outline" class="te-form-field" style="width: 170px;">
         <mat-label>Pago</mat-label>
         <mat-select [formControlName]="'paymentState'" readonly="true" disabled="true">
           <ng-container *ngFor="let item of paymentStates">
@@ -47,7 +39,7 @@
         </button>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="custom-form-field" style="width: 170px;">
+      <mat-form-field appearance="outline" class="te-form-field" style="width: 170px;">
         <mat-label>Estado envío</mat-label>
         <mat-select [formControlName]="'shipmentState'" readonly="true" disabled="true">
           <ng-container *ngFor="let item of shipmentStates">
@@ -64,7 +56,7 @@
         </button>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="custom-form-field" style="width: 250px;">
+      <mat-form-field appearance="outline" class="te-form-field" style="width: 250px;">
         <mat-label>Transportador</mat-label>
         <mat-select [formControlName]="'transporterId'" readonly="true" disabled="true">
           <ng-container *ngFor="let item of drivers">
@@ -82,31 +74,26 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field>
-      <mat-label> Precio kilo inicial</mat-label>
-      <input matInput [formControlName]="'initialKiloPrice'">
-      <button mat-icon-button type="button" matSuffix (click)="clearInput('initialKiloPrice')">
-        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
-        </mat-icon>
-      </button>
-    </mat-form-field>
+    <div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">Solicitante</div>
 
-    <mat-form-field>
-      <mat-label>Precio kilo adicional</mat-label>
-      <input matInput [formControlName]="'additionalKiloPrice'">
-      <button mat-icon-button type="button" matSuffix (click)="clearInput('additionalKiloPrice')">
-        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'"></mat-icon>
-      </button>
-    </mat-form-field>
+    <div class="order-container">
+        <mat-form-field appearance="outline" floatLabel="always" class="te-form-field te-form-field-disable" style="width: 80px;">
+            <mat-label>Tipo</mat-label>
+            <input matInput />
+          </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <mat-label> Precio mc3 </mat-label>
-      <input matInput [formControlName]="'priceCm3'">
-      <button mat-icon-button type="button" matSuffix (click)="clearInput('priceCm3')">
-        <mat-icon class="icon-size-4" [svgIcon]="'heroicons_solid:x-circle'">
-        </mat-icon>
-      </button>
-    </mat-form-field>
+    <div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">Remitente</div>
+
+    <div class="order-container">
+
+    </div>
+
+    <div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">Destinatario</div>
+
+    <div class="order-container">
+
+    </div>
 
     <!-- Actions -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0 ">

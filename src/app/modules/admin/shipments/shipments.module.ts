@@ -7,7 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+    MatFormFieldModule,
+    MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import {
@@ -47,6 +50,10 @@ import { AgGridModule } from 'ag-grid-angular';
         {
             provide: MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY,
             useValue: MAT_SELECT_SCROLL_STRATEGY_PROVIDER,
+        },
+        {
+            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+            useValue: { appearance: 'outline' },
         },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -3,9 +3,18 @@
   font-size: 14px;
 }
 
-.custom-form-field {
+.order-right-align {
+  text-align: right;
+}
+
+input.order-right-align::-webkit-outer-spin-button,
+input.order-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+.te-form-field {
   font-size: 14px;
-  height: 15px;
+  height: 10px;
   margin-top: 3px;
   margin-bottom: -1.25em;
 
@@ -17,4 +26,14 @@
       padding-bottom: 2px;
       font-size: 14px;
   }
+}
+
+.te-form-field-disable {
+  pointer-events: none;
+}
+
+.dialog-subtitle {
+    padding-top: 18px;
+    text-align: center;
+    color: #3B3B89 !important;
 }
