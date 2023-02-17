@@ -51,11 +51,7 @@ import { ShipmentPersonInfoComponent } from './details/shipment-person-info/ship
         {
             provide: MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY,
             useValue: MAT_SELECT_SCROLL_STRATEGY_PROVIDER,
-        },
-        {
-            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-            useValue: { appearance: 'outline' },
-        },
+        }
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
