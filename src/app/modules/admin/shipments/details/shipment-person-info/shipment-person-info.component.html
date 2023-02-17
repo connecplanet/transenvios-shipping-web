@@ -30,14 +30,14 @@
 
 <div class="order-container" style="padding-top: 23px; width: 100%;">
     <mat-form-field
-        appearance="outline" floatLabel="always"
+        appearance="outline" floatLabel="always" *ngIf="person.cityName"
         class="te-form-field te-form-field-disable" style="width: 230px;">
         <mat-label>Ciudad Origen</mat-label>
         <input matInput [(ngModel)]="person.cityName" />
     </mat-form-field>
 
     <mat-form-field
-        appearance="outline" floatLabel="always"
+        appearance="outline" floatLabel="always" *ngIf="person.cityName"
         class="te-form-field te-form-field-disable" style="width: 230px;">
         <mat-label>Dirección Origen</mat-label>
         <input matInput [(ngModel)]="person.address" />
