@@ -14,18 +14,18 @@ export interface IShipmentListItem {
 }
 
 export interface IShipmentOrder {
-    orderId: string;
-    applicationDate: string;
-    paymentState: string;
-    shipmentState: string;
-    transporterId: string;
-    initialPrice: string;
-    taxes: string;
-    totalPrice: string;
-    customer: IShipmentPerson;
-    sender: IShipmentPerson;
-    recipient: IShipmentPerson;
-    packages: IShipmentPackage[];
+    orderId?: string;
+    applicationDate?: string;
+    paymentState?: string;
+    shipmentState?: string;
+    transporterId?: string;
+    initialPrice?: string;
+    taxes?: string;
+    totalPrice?: string;
+    customer?: IShipmentPerson;
+    sender?: IShipmentPerson;
+    recipient?: IShipmentPerson;
+    packages?: IShipmentPackage[];
 }
 
 export interface IShipmentPerson {
@@ -40,14 +40,14 @@ export interface IShipmentPerson {
 }
 
 export interface IShipmentPackage {
-    id: string;
-    height: string;
-    length: string;
-    width: string;
-    weight: string;
-    quantity: number;
-    isFragile: boolean;
-    isUrgent: boolean;
+    id?: string;
+    height?: string;
+    length?: string;
+    width?: string;
+    weight?: string;
+    quantity?: number;
+    isFragile?: boolean;
+    isUrgent?: boolean;
 }
 
 export interface IShipmentState {

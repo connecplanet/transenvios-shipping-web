@@ -19,14 +19,11 @@ import { Subject, takeUntil } from 'rxjs';
 export class ShipmentDialogComponent implements OnInit
 {
     shipmentId: number;
-    order: IShipmentOrder;
-
     orderForm: UntypedFormGroup;
-    isCreate: boolean = false;
-    route: Routes;
     shipmentStates: IShipmentState[];
     paymentStates: IShipmentState[]
     drivers: IDriverCatalog[];
+    order: IShipmentOrder = {};
 
     constructor(
         public matDialogRef: MatDialogRef<ShipmentDialogComponent>,
@@ -35,11 +32,8 @@ export class ShipmentDialogComponent implements OnInit
         private shipmentService: ShipmentOrderService,
     )
     {
-        this.route = dialogData['route'];
         this.shipmentId = dialogData['id'];
         this.drivers = dialogData['drivers'];
-
-        this.isCreate = (this.route == null)
     }
 
     ngOnInit(): void
@@ -50,20 +44,17 @@ export class ShipmentDialogComponent implements OnInit
 
         this.shipmentService.getDetails(this.shipmentId).subscribe((order) => {
             this.order = order;
-            setTimeout(() => this.setNewValues(), 1000);
+            setTimeout(() => this.setNewValues(), 100);
         });
     }
 
     private createForm() {
         this.orderForm = this._formBuilder.group({
-            id: [this.order?.orderId, []],
-            applicationDate: [this.order?.applicationDate, [Validators.required]],
+            id: [this.order?.orderId, [Validators.nullValidator]],
+            applicationDate: [this.order?.applicationDate, [Validators.nullValidator]],
             paymentState: [this.order?.paymentState, [Validators.required]],
             shipmentState: [this.order?.shipmentState, [Validators.required]],
             transporterId: [this.order?.transporterId, [Validators.required]],
-            initialKiloPrice: [this.route?.initialKiloPrice, [Validators.required]],
-            additionalKiloPrice: [this.route?.additionalKiloPrice, [Validators.required]],
-            priceCm3: [this.route?.priceCm3, [Validators.required]],
         });
     }
 
@@ -81,8 +72,12 @@ export class ShipmentDialogComponent implements OnInit
 
     save(): void {
 
-        if(this.orderForm.valid)
-            this.matDialogRef.close({event: this.isCreate ?'addRoute' :'saveRoute', data: this.orderForm.getRawValue() });
+        if(this.orderForm.valid) {
+            this.matDialogRef.close({
+                event: 'saveOrder',
+                data: this.orderForm.getRawValue()
+            });
+        }
     }
 
     clearInput(inputName: string): void {
