@@ -1,6 +1,42 @@
 .dialog-subtitle {
-  padding-top: 0px;
+  padding-top: 18px;
   padding-bottom: 4px;
+  font-size: 15px !important;
   text-align: center;
   color: #3B3B89 !important;
 }
+
+.order-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+
+.order-right-align {
+  text-align: right;
+}
+
+input.order-right-align::-webkit-outer-spin-button,
+input.order-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+mat-form-field {
+  font-size: 14px;
+  height: 10px;
+  margin-top: 3px;
+  margin-bottom: -1.25em;
+
+  input.mat-input-element {
+    padding-bottom: 2px;
+    font-size: 14px;
+    height: 10px;
+  }
+
+  label.mat-form-field-label {
+    font-size: 1rem;
+    top: 1.45em;
+  }
+}
+
+.te-form-field-disable {
+    pointer-events: none;
+  }

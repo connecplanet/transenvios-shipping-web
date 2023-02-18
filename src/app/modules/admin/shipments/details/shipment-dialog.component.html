@@ -12,13 +12,13 @@
   <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="orderForm">
 
     <div class="order-container">
-      <mat-form-field appearance="outline" class="fuse-mat-dense">
+      <mat-form-field appearance="outline" style="width: 120px;" class="te-form-field-disable" >
         <mat-label>ID</mat-label>
         <input matInput [formControlName]="'id'" placeholder="ID"
         readonly="true" disabled="true">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 120px;">
+      <mat-form-field appearance="outline" style="width: 120px;" class="te-form-field-disable" >
         <mat-label>Fecha solicitud</mat-label>
         <input matInput [formControlName]="'applicationDate'" placeholder="Fecha solicitud"
         readonly="true" disabled="true">
