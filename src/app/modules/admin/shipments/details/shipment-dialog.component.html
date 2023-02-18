@@ -12,19 +12,19 @@
   <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="orderForm">
 
     <div class="order-container">
-      <mat-form-field appearance="outline"style="width: 120px;" class="fuse-mat-dense">
+      <mat-form-field appearance="outline" class="fuse-mat-dense">
         <mat-label>ID</mat-label>
         <input matInput [formControlName]="'id'" placeholder="ID"
         readonly="true" disabled="true">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 120px;" class="fuse-mat-dense">
+      <mat-form-field appearance="outline" style="width: 120px;">
         <mat-label>Fecha solicitud</mat-label>
         <input matInput [formControlName]="'applicationDate'" placeholder="Fecha solicitud"
         readonly="true" disabled="true">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 170px;" class="fuse-mat-dense">
+      <mat-form-field appearance="outline" style="width: 170px;">
         <mat-label>Pago</mat-label>
         <mat-select [formControlName]="'paymentState'" placeholder="Pago">
           <ng-container *ngFor="let item of paymentStates">
@@ -41,7 +41,7 @@
         </button>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 170px;" class="fuse-mat-dense">
+      <mat-form-field appearance="outline" style="width: 170px;">
         <mat-label>Estado envío</mat-label>
         <mat-select [formControlName]="'shipmentState'" placeholder="Estado envío">
           <ng-container *ngFor="let item of shipmentStates">
@@ -58,7 +58,7 @@
         </button>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 250px;" class="fuse-mat-dense">
+      <mat-form-field appearance="outline" style="width: 250px;">
         <mat-label>Transportador</mat-label>
         <mat-select [formControlName]="'transporterId'" placeholder="Transportador">
           <ng-container *ngFor="let item of drivers">

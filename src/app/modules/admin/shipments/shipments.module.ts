@@ -25,6 +25,8 @@ import { ShipmentListComponent } from './shipment-list.component';
 import { ShipmentDialogComponent } from './details/shipment-dialog.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ShipmentPersonInfoComponent } from './details/shipment-person-info/shipment-person-info.component';
+import { FuseHighlightModule } from '@fuse/components/highlight';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
     declarations: [ShipmentListComponent, ShipmentDialogComponent, ShipmentPersonInfoComponent],
@@ -46,6 +48,8 @@ import { ShipmentPersonInfoComponent } from './details/shipment-person-info/ship
         ScrollingModule,
         CommonModule,
         AgGridModule,
+        FuseHighlightModule,
+        SharedModule
     ],
     providers: [
         {

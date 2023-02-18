@@ -1,20 +1,16 @@
 import { Component, OnInit, ViewEncapsulation, Inject, ChangeDetectorRef, Injector } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { City } from 'app/core/cities/cities.types';
-import { Driver, Country, IDriverCatalog } from 'app/core/drivers/drivers.types';
-import { Routes } from 'app/core/shipmentOrderRoute/route.types';
+import { IDriverCatalog } from 'app/core/drivers/drivers.types';
 import { ShipmentOrderService } from 'app/core/shipments/shipment-order.service';
 import { IShipmentState, IShipmentOrder } from 'app/core/shipments/shipment-order.types';
 import { paymentStates, shipmentStates } from 'app/mock-api/apps/shipments/data';
-import {countries } from 'app/mock-api/apps/users/data';
-import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-    selector     : 'shipment-dialog',
-    templateUrl  : './shipment-dialog.component.html',
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./shipment-dialog.component.scss']
+    selector: 'shipment-dialog',
+    templateUrl: './shipment-dialog.component.html',
+    styleUrls: ['./shipment-dialog.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ShipmentDialogComponent implements OnInit
 {
