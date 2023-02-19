@@ -27,6 +27,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ShipmentPersonInfoComponent } from './details/shipment-person-info/shipment-person-info.component';
 import { FuseHighlightModule } from '@fuse/components/highlight';
 import { SharedModule } from 'app/shared/shared.module';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
     declarations: [ShipmentListComponent, ShipmentDialogComponent, ShipmentPersonInfoComponent],
@@ -44,6 +45,7 @@ import { SharedModule } from 'app/shared/shared.module';
         ReactiveFormsModule,
         MatSelectModule,
         MatMenuModule,
+        MatGridListModule,
         FuseFindByKeyPipeModule,
         ScrollingModule,
         CommonModule,

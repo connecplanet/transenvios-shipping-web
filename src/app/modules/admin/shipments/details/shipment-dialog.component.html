@@ -14,14 +14,12 @@
     <div class="order-container">
       <mat-form-field appearance="outline" style="width: 120px;" class="te-form-field-disable" >
         <mat-label>ID</mat-label>
-        <input matInput [formControlName]="'id'" placeholder="ID"
-        readonly="true" disabled="true">
+        <input matInput [formControlName]="'id'" placeholder="ID" readonly="true">
       </mat-form-field>
 
       <mat-form-field appearance="outline" style="width: 120px;" class="te-form-field-disable" >
         <mat-label>Fecha solicitud</mat-label>
-        <input matInput [formControlName]="'applicationDate'" placeholder="Fecha solicitud"
-        readonly="true" disabled="true">
+        <input matInput [formControlName]="'applicationDate'" placeholder="Fecha solicitud" readonly="true">
       </mat-form-field>
 
       <mat-form-field appearance="outline" style="width: 170px;">
@@ -87,6 +85,11 @@
     <div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">Destinatario</div>
 
     <app-shipment-person-info [data]="order.recipient" *ngIf="order.recipient"></app-shipment-person-info>
+
+    <mat-grid-list cols="2" rowHeight="2:0.7">
+      <mat-grid-tile>1</mat-grid-tile>
+      <mat-grid-tile>2</mat-grid-tile>
+    </mat-grid-list>
 
     <!-- Actions -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0" style="padding-top: 24px;">

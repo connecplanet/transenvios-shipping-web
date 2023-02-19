@@ -37,6 +37,13 @@ mat-form-field {
   }
 }
 
-.te-form-field-disable {
-    pointer-events: none;
-  }
+mat-grid-list {
+  margin: 5;
+  padding: 0px;
+  height: 20px;
+}
+
+mat-grid-tile {
+  background: lightblue;
+  padding-top: 10px;
+}
