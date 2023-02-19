@@ -11,3 +11,9 @@ export const paymentStates = [
     { id: 0, name: 'Sin Pagar' },
     { id: 1, name: 'Pagado' },
 ];
+
+export const documentTypes = [
+    { id: 'C.C.', name: 'Cédula' },
+    { id: 'C.E.', name: 'Cédula de Extranjería' },
+    { id: 'NIT', name: 'NIT' },
+];

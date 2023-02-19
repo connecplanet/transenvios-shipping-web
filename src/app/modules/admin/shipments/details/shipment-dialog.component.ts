@@ -17,7 +17,7 @@ export class ShipmentDialogComponent implements OnInit
     shipmentId: number;
     orderForm: UntypedFormGroup;
     shipmentStates: IShipmentState[];
-    paymentStates: IShipmentState[]
+    paymentStates: IShipmentState[];
     drivers: IDriverCatalog[];
     order: IShipmentOrder = {};
 

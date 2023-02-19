@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-shipment-total',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./shipment-total.component.scss']
 })
 export class ShipmentTotalComponent {
-
+    @Input() initialPrice = '';
+    @Input() taxes = '';
+    @Input() totalPrice = '';
 }

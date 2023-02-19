@@ -86,14 +86,18 @@
 
     <app-shipment-person-info [data]="order.recipient" *ngIf="order.recipient"></app-shipment-person-info>
 
-    <mat-grid-list cols="2" rowHeight="2:0.7">
-      <mat-grid-tile>
-        <app-shipment-package-list></app-shipment-package-list>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <app-shipment-total></app-shipment-total>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <div>
+        <div style="width:50%; display:inline-block;">
+            <app-shipment-package-list></app-shipment-package-list>
+        </div>
+        <div style="width:50%; display:inline-block;">
+            <app-shipment-total
+                [initialPrice]="order.initialPrice"
+                [taxes]="order.taxes"
+                [totalPrice]="order.totalPrice"
+            ></app-shipment-total>
+        </div>
+    </div>
 
     <!-- Actions -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0" style="padding-top: 24px;">
