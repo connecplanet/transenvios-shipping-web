@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import {
     MatFormFieldModule,
     MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -27,10 +28,18 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ShipmentPersonInfoComponent } from './details/shipment-person-info/shipment-person-info.component';
 import { FuseHighlightModule } from '@fuse/components/highlight';
 import { SharedModule } from 'app/shared/shared.module';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ShipmentTotalComponent } from './details/shipment-total/shipment-total.component';
+import { ShipmentPackageListComponent } from './details/shipment-package-list/shipment-package-list.component';
 
 @NgModule({
-    declarations: [ShipmentListComponent, ShipmentDialogComponent, ShipmentPersonInfoComponent],
+    declarations: [
+            ShipmentListComponent, 
+            ShipmentDialogComponent, 
+            ShipmentPersonInfoComponent, 
+            ShipmentTotalComponent, 
+            ShipmentPackageListComponent
+        ],
     imports: [
         FuseAlertModule,
         MatTableModule,
@@ -41,6 +50,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
         MatInputModule,
         MatDialogModule,
         MatIconModule,
+        MatCardModule,
         FormsModule,
         ReactiveFormsModule,
         MatSelectModule,
@@ -61,4 +71,4 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ShipmentsModule {}
+export class ShipmentsModule { }

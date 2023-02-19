@@ -6,7 +6,7 @@
   color: #3B3B89 !important;
 }
 
-.order-container mat-form-field + mat-form-field {
+.order-container mat-form-field+mat-form-field {
   margin-left: 8px;
 }
 
@@ -44,6 +44,6 @@ mat-grid-list {
 }
 
 mat-grid-tile {
-  background: lightblue;
+  background: #f2f2f2;
   padding-top: 10px;
 }

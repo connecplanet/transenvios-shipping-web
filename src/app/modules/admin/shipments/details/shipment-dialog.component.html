@@ -87,8 +87,12 @@
     <app-shipment-person-info [data]="order.recipient" *ngIf="order.recipient"></app-shipment-person-info>
 
     <mat-grid-list cols="2" rowHeight="2:0.7">
-      <mat-grid-tile>1</mat-grid-tile>
-      <mat-grid-tile>2</mat-grid-tile>
+      <mat-grid-tile>
+        <app-shipment-package-list></app-shipment-package-list>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <app-shipment-total></app-shipment-total>
+      </mat-grid-tile>
     </mat-grid-list>
 
     <!-- Actions -->
