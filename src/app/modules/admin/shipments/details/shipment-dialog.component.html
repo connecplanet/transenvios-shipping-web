@@ -86,21 +86,21 @@
 
     <app-shipment-person-info [data]="order.recipient" *ngIf="order.recipient"></app-shipment-person-info>
 
-    <div style="width:100%; display:inline-block; background-color: brown;"></div>
-
-    <div>
-        <div style="width:50%; display:inline-block;">
-            <app-shipment-package-list [items]="order.packages">
-            </app-shipment-package-list>
-        </div>
-        <div style="width:50%; display:inline-block;">
-            <app-shipment-total
+    <table>
+      <tr>
+        <td>
+          <app-shipment-package-list [items]="order.packages">
+          </app-shipment-package-list>
+        </td>
+        <td>
+          <app-shipment-total
                 [initialPrice]="order.initialPrice"
                 [taxes]="order.taxes"
                 [totalPrice]="order.totalPrice"
             ></app-shipment-total>
-        </div>
-    </div>
+        </td>
+      </tr>
+    </table>
 
     <!-- Actions -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0" style="padding-top: 8px;">
