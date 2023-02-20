@@ -1,18 +1,18 @@
-<div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle" style="padding-top: 20px;">Costos del Servicio</div>
+<div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">
+    Costos del Servicio
+</div>
 
-<div id="total">
-    <table>
-        <tr>
-            <td><span class="cost-text">Valor inicial</span></td>
-            <td class="numeric-text"><span class="cost-text">$ {{ initialPrice }}</span></td>
-        </tr>
-        <tr>
-            <td><span class="cost-text">IVA 19%</span></td>
-            <td class="numeric-text"><span class="cost-text">$ {{ taxes }}</span></td>
-        </tr>
-        <tr>
-            <td><span class="total-text">TOTAL</span></td>
-            <td class="numeric-text"><span class="total-text">$ {{ totalPrice }}</span></td>
-        </tr>
-      </table>
+<div id="packages">
+    <div style="padding-top: 10px;">
+        <div class="cost-text" style="width:50%; display:inline-block;">Valor inicial</div>
+        <div class="cost-text numeric-text" style="width:50%; display:inline-block;">$ {{ initialPrice }}</div>
+    </div>
+    <div style="padding-top: 10px;">
+        <div class="cost-text" style="width:50%; display:inline-block;">IVA 19%</div>
+        <div class="cost-text numeric-text" style="width:50%; display:inline-block;">$ {{ taxes }}</div>
+    </div>
+    <div style="padding-top: 10px;">
+        <div class="total-text" style="width:50%; display:inline-block;">TOTAL</div>
+        <div class="total-text numeric-text" style="width:50%; display:inline-block;">$ {{ totalPrice }}</div>
+    </div>
 </div>

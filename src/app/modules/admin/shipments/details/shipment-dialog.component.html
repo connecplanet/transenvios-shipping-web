@@ -86,9 +86,12 @@
 
     <app-shipment-person-info [data]="order.recipient" *ngIf="order.recipient"></app-shipment-person-info>
 
+    <div style="width:100%; display:inline-block; background-color: brown;"></div>
+
     <div>
         <div style="width:50%; display:inline-block;">
-            <app-shipment-package-list></app-shipment-package-list>
+            <app-shipment-package-list [items]="order.packages">
+            </app-shipment-package-list>
         </div>
         <div style="width:50%; display:inline-block;">
             <app-shipment-total
@@ -100,7 +103,7 @@
     </div>
 
     <!-- Actions -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0" style="padding-top: 24px;">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-end mt-4 sm:mt-0" style="padding-top: 8px;">
       <div class="flex items-center mt-4 sm:mt-0">
         <!-- Discard -->
         <button class="ml-auto sm:ml-0" mat-stroked-button (click)="discard()">Cancelar</button>

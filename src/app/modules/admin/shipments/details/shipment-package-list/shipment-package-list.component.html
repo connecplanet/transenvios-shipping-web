@@ -1,1 +1,8 @@
-<div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">Paquete</div>
+<div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">
+    Paquete
+</div>
+<div id="packages">
+    <ul>
+        <li *ngFor="let item of items">{{ item.id }}</li>
+    </ul>
+</div>
