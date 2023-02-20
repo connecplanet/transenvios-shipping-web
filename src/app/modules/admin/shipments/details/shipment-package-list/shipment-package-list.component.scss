@@ -1,30 +1,22 @@
-#packages {
+.packages {
     border-width: 1px;
     border-style: solid;
     border-radius: 25px;
     background: #fcfcfd;
     padding: 10px;
-    width: 95%;
-    height: 125px;
+    width: 600px;
+    height: 100px;
     padding-bottom: 10px;
 }
 
 #items {
-    max-height: 127px;
+    max-height: 100px;
     margin: auto;
     overflow-y: scroll;
-    width: 100%;
+    width: 610px;
 }
 
- table, th, td {
-    border: 1px solid red;
-    border-collapse: collapse;
-  }
-
-table {
-    width:100%;
-}
-
-.package-section {
-    margin: 12px 0;
+table, th, td {
+  border: 1px solid red;
+  border-collapse: collapse;
 }

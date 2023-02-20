@@ -2,32 +2,13 @@
     Paquete
 </div>
 <div id="items" *ngIf="packages">
-    <div id="packages" *ngFor="let item of packages">
-        <mat-label>Paquete {{ item.lineId }}</mat-label><br>
-        <table>
-            <tr>
-                <td>
-                    <fieldset>
-                        <legend>Alto</legend>
-                        {{ item.height }}
-                    </fieldset>
-                </td>
-                <td>
-                    <fieldset>
-                        <legend>Ancho</legend>
-                        {{ item.width }}
-                    </fieldset>
-                </td>
-                <td>
-                    <fieldset>
-                        <legend>Largo</legend>
-                        {{ item.length }}
-                    </fieldset>
-                </td>
-                <td>
-                    <mat-checkbox [(ngModel)]="item.isFragile" [disabled]="true">Delicado</mat-checkbox>
-                </td>
-            </tr>
-        </table>
+    <div class="packages" *ngFor="let item of packages">
+        <mat-label>Paquete <b>{{ item.lineId }}</b></mat-label><br>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Alto:<br>{{ item.height }}</span>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Ancho:<br>{{ item.width }}</span>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Largo:<br>{{ item.length }}</span>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Peso:<br>{{ item.weight }}</span>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Cantidad:<br>{{ item.quantity }}</span>
+        <span style="float:left; margin: 10px 0px 10px 0px; text-align: center;"><mat-checkbox [(ngModel)]="item.isFragile" [disabled]="true">Delicado</mat-checkbox></span>
     </div>
 </div>
