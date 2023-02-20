@@ -1,53 +1,65 @@
 import { Component, OnInit, ViewEncapsulation, Inject, ChangeDetectorRef, Injector } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { City } from 'app/core/cities/cities.types';
-import { Driver, Country, IDriverCatalog } from 'app/core/drivers/drivers.types';
-import { Routes } from 'app/core/shipmentOrderRoute/route.types';
-import { IShipmentListItem } from 'app/core/shipments/shipment-order.types';
-import {countries } from 'app/mock-api/apps/users/data';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { IDriverCatalog } from 'app/core/drivers/drivers.types';
+import { ShipmentOrderService } from 'app/core/shipments/shipment-order.service';
+import { IShipmentState, IShipmentOrder } from 'app/core/shipments/shipment-order.types';
+import { paymentStates, shipmentStates } from 'app/mock-api/apps/shipments/data';
 
 @Component({
-    selector     : 'shipment-dialog',
-    templateUrl  : './shipment-dialog.component.html',
+    selector: 'shipment-dialog',
+    templateUrl: './shipment-dialog.component.html',
+    styleUrls: ['./shipment-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ShipmentDialogComponent implements OnInit
 {
-    composeForm: UntypedFormGroup;
-    isCreate: boolean = false;
-    route: Routes;
-    countries: Country[];
-    cities: City[];
-    drivers: IDriverCatalog[];
-
     shipmentId: number;
-    shipmentData$!: Observable<IShipmentListItem>;
+    orderForm: UntypedFormGroup;
+    shipmentStates: IShipmentState[];
+    paymentStates: IShipmentState[];
+    drivers: IDriverCatalog[];
+    order: IShipmentOrder = {};
 
     constructor(
         public matDialogRef: MatDialogRef<ShipmentDialogComponent>,
-        private formBuilder: UntypedFormBuilder,
-        @Inject(MAT_DIALOG_DATA) public dialogParams,
+        private _formBuilder: UntypedFormBuilder,
+        @Inject(MAT_DIALOG_DATA) public dialogData,
+        private shipmentService: ShipmentOrderService,
     )
     {
-        this.shipmentId = dialogParams['id'];
-        this.drivers = dialogParams['drivers'];
+        this.shipmentId = dialogData['id'];
+        this.drivers = dialogData['drivers'];
     }
 
     ngOnInit(): void
     {
-        this.countries = countries;
+        this.shipmentStates = shipmentStates;
+        this.paymentStates = paymentStates;
+        this.createForm();
 
-        this.composeForm = this.formBuilder.group({
-            id     : [this.route?.id, []],
-            driverId: [this.route?.fromCityCode, [Validators.required]],
-            fromCityCode     : [this.route?.fromCityCode, [Validators.required]],
-            toCityCode     : [this.route?.toCityCode, [Validators.required]],
-            initialKiloPrice     : [this.route?.initialKiloPrice, [Validators.required]],
-            additionalKiloPrice     : [this.route?.additionalKiloPrice, [Validators.required]],
-            priceCm3     : [this.route?.priceCm3, [Validators.required]],
+        this.shipmentService.getDetails(this.shipmentId).subscribe((order) => {
+            this.order = order;
+            setTimeout(() => this.setNewValues(), 100);
         });
+    }
+
+    private createForm() {
+        this.orderForm = this._formBuilder.group({
+            id: [this.order?.orderId, [Validators.nullValidator]],
+            applicationDate: [this.order?.applicationDate, [Validators.nullValidator]],
+            paymentState: [this.order?.paymentState, [Validators.required]],
+            shipmentState: [this.order?.shipmentState, [Validators.required]],
+            transporterId: [this.order?.transporterId, [Validators.required]],
+        });
+    }
+
+    private setNewValues(){
+        this.orderForm.controls['id'].setValue(this.order?.orderId);
+        this.orderForm.controls['applicationDate'].setValue(this.order?.applicationDate);
+        this.orderForm.controls['paymentState'].setValue(this.order?.paymentState);
+        this.orderForm.controls['shipmentState'].setValue(this.order?.shipmentState);
+        this.orderForm.controls['transporterId'].setValue(this.order?.transporterId);
     }
 
     discard(): void {
@@ -56,17 +68,22 @@ export class ShipmentDialogComponent implements OnInit
 
     save(): void {
 
-        if(this.composeForm.valid)
-            this.matDialogRef.close({event: this.isCreate ?'addRoute' :'saveRoute', data: this.composeForm.getRawValue() });
+        if(this.orderForm.valid) {
+            this.matDialogRef.close({
+                event: 'saveOrder',
+                data: this.orderForm.getRawValue()
+            });
+        }
     }
 
     clearInput(inputName: string): void {
-        eval(`this.composeForm.patchValue({${inputName}: ''})`);
+        eval(`this.orderForm.patchValue({${inputName}: ''})`);
     }
-
+/*
      getCountryByCode(): Country
      {
-        const iso  = this.composeForm.get('country').value;
-        return this.countries.find(country => country.iso === iso);
+        const iso  = this.orderForm.get('country').value;
+        return this.shipmentStates.find(country => country.iso === iso);
      }
+     */
 }

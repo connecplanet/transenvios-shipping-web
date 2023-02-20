@@ -1,0 +1,45 @@
+<div class="order-container">
+    <mat-form-field appearance="outline" class="te-form-field-disable" style="width: 100px;">
+        <mat-label>Tipo</mat-label>
+        <input matInput [(ngModel)]="person.documentType" placeholder="Tipo" readonly="true"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="te-form-field-disable" style="width: 207px;">
+        <mat-label>Documento</mat-label>
+        <input matInput [(ngModel)]="person.documentId" placeholder="Documento" readonly="true"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="te-form-field-disable" style="width: 265px;">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="person.firstName" placeholder="Nombre" readonly="true"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="te-form-field-disable" style="width: 265px;">
+        <mat-label>Apellido</mat-label>
+        <input matInput [(ngModel)]="person.lastName" placeholder="Apellido" readonly="true"/>
+    </mat-form-field>
+</div>
+
+<div class="order-container" style="padding-top: 23px; width: 100%;">
+    <mat-form-field appearance="outline" *ngIf="person.cityName"
+        class="te-form-field-disable" style="width: 200px;">
+        <mat-label>Ciudad</mat-label>
+        <input matInput [(ngModel)]="person.cityName" placeholder="Ciudad" readonly="true"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="person.cityName"
+        class="te-form-field-disable" style="width: 260px;">
+        <mat-label>Dirección</mat-label>
+        <input matInput [(ngModel)]="person.address" placeholder="Dirección" readonly="true"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="te-form-field-disable" style="width: 130px;">
+        <mat-label>Teléfono</mat-label>
+        <input matInput [(ngModel)]="person.phone" placeholder="Teléfono" readonly="true"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="te-form-field-disable" style="width: 245px;">
+        <mat-label>Correo</mat-label>
+        <input matInput [(ngModel)]="person.email" placeholder="Correo" readonly="true"/>
+    </mat-form-field>
+</div>

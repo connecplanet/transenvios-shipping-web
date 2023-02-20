@@ -1,0 +1,14 @@
+<div class="mt-12 sm:mt-0 text-2xl font-bold leading-tight tracking-tight dialog-subtitle">
+    Paquete
+</div>
+<div id="items" *ngIf="packages">
+    <div class="packages" *ngFor="let item of packages">
+        <mat-label>Paquete <b>{{ item.lineId }}</b></mat-label><br>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Alto:<br>{{ item.height }}</span>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Ancho:<br>{{ item.width }}</span>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Largo:<br>{{ item.length }}</span>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Peso:<br>{{ item.weight }}</span>
+        <span style="float:left; margin: 10px 30px 10px 0px;">Cantidad:<br>{{ item.quantity }}</span>
+        <span style="float:left; margin: 10px 0px 10px 0px; text-align: center;"><mat-checkbox [(ngModel)]="item.isFragile" [disabled]="true">Delicado</mat-checkbox></span>
+    </div>
+</div>

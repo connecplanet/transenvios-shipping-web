@@ -10,3 +10,8 @@ export interface User
     countryCode?: string;
     phone?: string;
 }
+
+export interface IDocumentType {
+    id: number|string;
+    name: string;
+}

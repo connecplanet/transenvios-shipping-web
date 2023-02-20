@@ -14,58 +14,44 @@ export interface IShipmentListItem {
 }
 
 export interface IShipmentOrder {
-    orderId: number;
-    applicationDate: string;
-    paymentState: number;
-    shipmentState: number;
-    transporterId: any;
-    initialPrice: string;
-    taxes: string;
-    totalPrice: string;
-    customer: IShipmentCustomer;
-    sender: IShipmentSender;
-    recipient: IShipmentRecipient;
-    packages: IShipmentPackage[];
+    orderId?: string;
+    applicationDate?: string;
+    paymentState?: string;
+    shipmentState?: string;
+    transporterId?: string;
+    initialPrice?: string;
+    taxes?: string;
+    totalPrice?: string;
+    customer?: IShipmentPerson;
+    sender?: IShipmentPerson;
+    recipient?: IShipmentPerson;
+    packages?: IShipmentPackage[];
 }
 
-export interface IShipmentCustomer {
+export interface IShipmentPerson {
     documentType: string;
     documentId: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-}
-
-export interface IShipmentSender {
-    cityName: string;
-    address: string;
-    documentType: string;
-    documentId: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-}
-
-export interface IShipmentRecipient {
-    cityName: string;
-    address: string;
-    documentType: string;
-    documentId: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
+    firstName?: string;
+    lastName?: string;
+    phone?: string;
+    email?: string;
+    cityName?: string;
+    address?: string;
 }
 
 export interface IShipmentPackage {
-    id: string;
-    height: string;
-    length: string;
-    width: string;
-    weight: string;
-    quantity: number;
-    isFragile: boolean;
-    isUrgent: boolean;
+    id?: string;
+    height?: string;
+    length?: string;
+    width?: string;
+    weight?: string;
+    quantity?: number;
+    isFragile?: boolean;
+    isUrgent?: boolean;
+    lineId?: number;
+}
+
+export interface IShipmentState {
+    id: number;
+    name: string;
 }
