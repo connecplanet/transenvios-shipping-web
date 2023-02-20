@@ -8,6 +8,7 @@ import { FuseAlertModule } from '@fuse/components/alert';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import {
     MatFormFieldModule,
     MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -34,14 +35,20 @@ import { ShipmentPackageListComponent } from './details/shipment-package-list/sh
 
 @NgModule({
     declarations: [
-            ShipmentListComponent, 
-            ShipmentDialogComponent, 
-            ShipmentPersonInfoComponent, 
-            ShipmentTotalComponent, 
+            ShipmentListComponent,
+            ShipmentDialogComponent,
+            ShipmentPersonInfoComponent,
+            ShipmentTotalComponent,
             ShipmentPackageListComponent
         ],
     imports: [
         FuseAlertModule,
+        FuseFindByKeyPipeModule,
+        FuseHighlightModule,
+        ScrollingModule,
+        CommonModule,
+        AgGridModule,
+        SharedModule,
         MatTableModule,
         MatPaginatorModule,
         MatIconModule,
@@ -56,12 +63,7 @@ import { ShipmentPackageListComponent } from './details/shipment-package-list/sh
         MatSelectModule,
         MatMenuModule,
         MatGridListModule,
-        FuseFindByKeyPipeModule,
-        ScrollingModule,
-        CommonModule,
-        AgGridModule,
-        FuseHighlightModule,
-        SharedModule
+        MatCheckboxModule,
     ],
     providers: [
         {

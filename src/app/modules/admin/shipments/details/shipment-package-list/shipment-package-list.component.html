@@ -3,24 +3,29 @@
 </div>
 <div id="items" *ngIf="packages">
     <div id="packages" *ngFor="let item of packages">
+        <mat-label>Paquete {{ item.lineId }}</mat-label><br>
         <table>
             <tr>
-                <td colspan="4">Paquete {{ item.lineId }}</td>
-            </tr>
-            <tr>
                 <td>
-                    Alto:<br>
-                    {{ item.height }}
-                </td>
-                <td>Ancho:<br>
-                    {{ item.width }}
+                    <fieldset>
+                        <legend>Alto</legend>
+                        {{ item.height }}
+                    </fieldset>
                 </td>
                 <td>
-                    Largo:<br>
-                    {{ item.length }}
+                    <fieldset>
+                        <legend>Ancho</legend>
+                        {{ item.width }}
+                    </fieldset>
                 </td>
-                <td>Peso:<br>
-                    {{ item.weight }}
+                <td>
+                    <fieldset>
+                        <legend>Largo</legend>
+                        {{ item.length }}
+                    </fieldset>
+                </td>
+                <td>
+                    <mat-checkbox [(ngModel)]="item.isFragile" [disabled]="true">Delicado</mat-checkbox>
                 </td>
             </tr>
         </table>
