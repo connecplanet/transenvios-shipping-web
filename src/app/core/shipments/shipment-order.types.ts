@@ -48,6 +48,7 @@ export interface IShipmentPackage {
     quantity?: number;
     isFragile?: boolean;
     isUrgent?: boolean;
+    lineId?: number;
 }
 
 export interface IShipmentState {

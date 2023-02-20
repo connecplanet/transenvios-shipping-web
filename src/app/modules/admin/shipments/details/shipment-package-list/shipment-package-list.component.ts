@@ -7,5 +7,12 @@ import { IShipmentPackage } from 'app/core/shipments/shipment-order.types';
   styleUrls: ['./shipment-package-list.component.scss']
 })
 export class ShipmentPackageListComponent {
-    @Input() items: IShipmentPackage[];
+    packages: IShipmentPackage[]
+    index: number = 0;
+    @Input() set items(value: IShipmentPackage[]) {
+      this.packages = value;
+      for(var index = 0; index < this.packages.length; index++){
+        this.packages[index].lineId = index + 1;
+      }
+    }
 }
