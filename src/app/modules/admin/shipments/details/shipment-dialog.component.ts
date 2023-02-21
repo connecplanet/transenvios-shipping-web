@@ -79,11 +79,4 @@ export class ShipmentDialogComponent implements OnInit
     clearInput(inputName: string): void {
         eval(`this.orderForm.patchValue({${inputName}: ''})`);
     }
-/*
-     getCountryByCode(): Country
-     {
-        const iso  = this.orderForm.get('country').value;
-        return this.shipmentStates.find(country => country.iso === iso);
-     }
-     */
 }

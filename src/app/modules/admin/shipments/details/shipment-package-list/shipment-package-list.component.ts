@@ -10,9 +10,11 @@ export class ShipmentPackageListComponent {
     packages: IShipmentPackage[]
     index: number = 0;
     @Input() set items(value: IShipmentPackage[]) {
-      this.packages = value;
-      for(var index = 0; index < this.packages.length; index++){
-        this.packages[index].lineId = index + 1;
+      if(value){
+        for(var index = 0; index < value.length; index++){
+            value[index].lineId = index + 1;
+        }
       }
+      this.packages = value;
     }
 }

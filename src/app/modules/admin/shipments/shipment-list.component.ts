@@ -161,8 +161,10 @@ export class ShipmentListComponent implements OnInit {
 
         dialogRef.afterClosed()
             .subscribe((response) => {
-                if (response.event === 'save') {
+                const userId = localStorage.getItem('userId');
+                if (response.event === 'saveOrder' && userId) {
                     const update = response.data;
+                    update['employeeId'] = userId;
                     this.shipmentService.update(update).subscribe((response) => {
                         this.fetchData();
                         this.showAlertPanel('success', 'Solicitud modificada correctamente!');
