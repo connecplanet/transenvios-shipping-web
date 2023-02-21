@@ -101,6 +101,7 @@ export class AuthService
 
                 // Store the user on the user service
                 this._userService.user = response.user;
+                localStorage.setItem('userId', response.user.id);
 
                 // Return a new observable with the response
                 return of(response);
